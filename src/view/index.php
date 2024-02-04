@@ -21,4 +21,8 @@ if (!isset($_SESSION['usuario'])) {
     include('components/nav.php');
 ?>
 
+<?php
+    include('components/footer.php');
+?>
+
 </body>
