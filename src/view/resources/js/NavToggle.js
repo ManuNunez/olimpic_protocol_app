@@ -1,11 +1,10 @@
+
 $(document).ready(function() {
     $('#menu-toggle').on('click', function() {
-        $('#mobile-menu').toggle();
+        $('#mobile-menu').toggleClass('hidden');
     });
 
     $('#mobile-menu a').on('click', function() {
-        var section = $(this).data('section');
-        contentSelector(section);
-        $('#mobile-menu').hide();
+        $('#mobile-menu').addClass('hidden');
     });
 });
