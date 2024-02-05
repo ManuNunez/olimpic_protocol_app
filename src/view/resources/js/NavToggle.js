@@ -1,10 +1,6 @@
-
-$(document).ready(function() {
-    $('#menu-toggle').on('click', function() {
-        $('#mobile-menu').toggleClass('hidden');
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('menuBtn').addEventListener('click', function() {
+      document.getElementById('menu').classList.toggle('hidden');
     });
-
-    $('#mobile-menu a').on('click', function() {
-        $('#mobile-menu').addClass('hidden');
-    });
-});
+  });
+  
