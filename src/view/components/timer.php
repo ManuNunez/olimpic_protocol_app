@@ -9,14 +9,12 @@ if (isset($_POST['start'])) {
 $elapsed_time = isset($_SESSION['start_time']) ? time() - $_SESSION['start_time'] : 0;
 ?>
 
-<div class="min-h-screen flex items-center justify-center">
-    <div class="text-center">
-        <h1 class="text-4xl font-bold mb-4">Cronómetro</h1>
-        <p class="text-2xl mb-4">Tiempo transcurrido: <?php echo gmdate("H:i:s", $elapsed_time); ?></p>
-        <form method="post">
-            <button type="submit" name="start" class="bg-blue-500 hover:bg-blue-700 text-white px-6 py-3 rounded-full focus:outline-none focus:shadow-outline-blue active:bg-blue-800">
-                Iniciar Cronómetro
-            </button>
-        </form>
-    </div>
+<div class="timer-container">
+    <h1 class="timer-title">Cronómetro</h1>
+    <p class="timer-text">Tiempo transcurrido: <?php echo gmdate("H:i:s", $elapsed_time); ?></p>
+    <form method="post">
+        <button type="submit" name="start" class="start-button">
+            Iniciar Cronómetro
+        </button>
+    </form>
 </div>
