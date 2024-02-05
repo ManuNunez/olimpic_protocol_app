@@ -20,8 +20,11 @@ $datos = getTestData();
     <div class="border p-4">
         <div class="flex justify-between items-center mb-4">
             <h2 class="text-2xl font-bold">Detalles de Sede</h2>
-            <button onclick="openModal()" class="bg-blue-500 text-white px-4 py-2 rounded">Crear Sede</button>
+            <button onclick="openModal('crear')" class="bg-blue-500 text-white px-4 py-2 rounded">Crear Sede</button>
+        </div>
 
+        <div class="mb-4">
+            <input type="text" id="searchInput" placeholder="Buscar sede..." class="p-2 border rounded-md">
         </div>
 
         <table class="min-w-full divide-y divide-gray-200">
@@ -32,6 +35,9 @@ $datos = getTestData();
                     </th>
                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                         Nombre de la Sede
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Acciones
                     </th>
                 </tr>
             </thead>
@@ -44,6 +50,10 @@ $datos = getTestData();
                         <td class="px-6 py-4 whitespace-nowrap">
                             <div class="text-sm text-gray-900"><?php echo $dato['locationName']; ?></div>
                         </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <button onclick="openModal('editar', <?php echo $dato['id']; ?>)" class="text-blue-500">Editar</button>
+                            <button onclick="borrarSede(<?php echo $dato['id']; ?>)" class="text-red-500 ml-2">Borrar</button>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
@@ -52,11 +62,13 @@ $datos = getTestData();
 <?php else : ?>
     <p class="text-red-500">No se encontraron datos para la sede con ID <?php echo $idSede; ?></p>
 <?php endif; ?>
+
 <div id="modal" class="fixed inset-0 bg-gray-800 bg-opacity-75 z-50 hidden">
     <div class="flex items-center justify-center h-screen">
         <div class="bg-white p-8 rounded shadow-md w-1/2">
-            <h2 class="text-2xl font-bold mb-4">Crear Sede</h2>
-            <form action="crear_sede.php" method="POST">
+            <h2 id="modalTitle" class="text-2xl font-bold mb-4">Crear Sede</h2>
+            <form id="sedeForm" action="crear_sede.php" method="POST">
+                <input type="hidden" id="sedeId" name="sede_id">
                 <label for="nombre_sede" class="block text-sm font-medium text-gray-700">Nombre de la Sede:</label>
                 <input type="text" id="nombre_sede" name="nombre_sede" class="mt-1 p-2 border rounded-md w-full">
                 <div class="mt-4">
@@ -69,3 +81,9 @@ $datos = getTestData();
 </div>
 
 <script src="../resources/js/modal.js"></script>
+<script>
+    function borrarSede(sedeId) {
+        // Lógica para borrar una sede
+        console.log('Borrar sede con ID: ' + sedeId);
+    }
+</script>
