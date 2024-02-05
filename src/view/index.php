@@ -28,7 +28,6 @@ if (!isset($_SESSION['usuario'])) {
     
     <div class="center-container">
         <div class="container">
-
             <?php
             include_once 'selector.php';
             contentSelector(isset($_GET['section']) ? $_GET['section'] : '');
