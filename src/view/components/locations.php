@@ -1,7 +1,7 @@
 <?php
 // Puedes cambiar la importación según tus necesidades
 // Si deseas datos reales
-// include_once 'read_location.php';
+ //include_once 'read_location.php';
 // Si deseas datos de prueba
 include_once '../controller/read_locations_beta.php';
 
@@ -69,8 +69,14 @@ $datos = getTestData();
             <h2 id="modalTitle" class="text-2xl font-bold mb-4">Crear Sede</h2>
             <form id="sedeForm" action="crear_sede.php" method="POST">
                 <input type="hidden" id="sedeId" name="sede_id">
-                <label for="nombre_sede" class="block text-sm font-medium text-gray-700">Nombre de la Sede:</label>
-                <input type="text" id="nombre_sede" name="nombre_sede" class="mt-1 p-2 border rounded-md w-full">
+                <label for="location_name" class="block text-sm font-medium text-gray-700">Nombre de la Sede:</label>
+                <input type="text" id="location_name" name="nombre_sede" class="mt-1 p-2 border rounded-md w-full">
+
+                <label for="classrooms_location" class="block text-sm font-medium text-gray-700">Salones disponibles en la Sede:</label>
+                <input type="number" id="classroom_location" name="nombre_sede" class="mt-1 p-2 border rounded-md w-full">
+
+                <label for="classroom_capacity" class="block text-sm font-medium text-gray-700">capacidad promedio de los salones:</label>
+                <input type="number" id="classroom_capacity" name="nombre_sede" class="mt-1 p-2 border rounded-md w-full">
                 <div class="mt-4">
                     <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Guardar</button>
                     <button type="button" onclick="closeModal()" class="ml-2 text-gray-600">Cancelar</button>
