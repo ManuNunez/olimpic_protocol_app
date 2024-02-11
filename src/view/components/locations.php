@@ -3,7 +3,7 @@
 // Si deseas datos reales
 // include_once 'read_location.php';
 // Si deseas datos de prueba
-include_once '../controller/read_locations_beta.php';
+include_once '../controller/services/read_locations_beta.php';
 
 $datos;
 
