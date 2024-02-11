@@ -1,3 +1,6 @@
+<head>
+    <link rel="stylesheet" href="../resources/main.css">
+</head>
 <!-- nav.php -->
 <nav class="bg-blue-500 p-4">
   <div class="container mx-auto flex justify-between items-center">
