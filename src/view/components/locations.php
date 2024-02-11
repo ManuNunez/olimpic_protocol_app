@@ -1,3 +1,6 @@
+<head>
+    <link rel="stylesheet" href="../resources/main.css">
+</head>
 <?php
 // Puedes cambiar la importación según tus necesidades
 // Si deseas datos reales

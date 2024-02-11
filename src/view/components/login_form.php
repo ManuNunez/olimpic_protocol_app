@@ -1,3 +1,6 @@
+<head>
+    <link rel="stylesheet" href="../resources/main.css">
+</head>
 <div class="bg-gray-800 p-8 rounded shadow-md w-96">
     <div class="text-center mb-6">
         <h2 class="text-2xl font-semibold">Iniciar Sesión</h2>
