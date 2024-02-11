@@ -1,118 +1,37 @@
-<!-- nav.php -->
-<nav class="bg-blue-500 p-4">
-    <div class="container mx-auto flex justify-between items-center">
-        <a href="#" class="text-white font-bold text-lg">Inicio</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <div class="lg:hidden">
-            <button id="menu-toggle" class="text-white focus:outline-none">
-                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-                </svg>
-            </button>
-        </div>
-
-        <div class="hidden lg:flex space-x-4">
-            <a href="?section=chat" class="text-white">Chat</a>
-            <a href="?section=cronometro" class="text-white">Cronómetro</a>
-            <a href="?section=listaAsistencia" class="text-white">Lista de Asistencia</a>
-            <a href="?section=registro" class="text-white">Registro</a>
-            <a href="?section=olimpiadas" class="text-white">Olimpiadas</a>
-            <a href="?section=sedes" class="text-white">Sedes</a>
-            <a href="?section=cuentas" class="text-white">Cuentas</a>
-        </div>
-    </div>
-
-    <div id="mobile-menu" class="lg:hidden hidden bg-white p-4">
-        <a href="?section=chat" class="block text-gray-800 mb-2">Chat</a>
-        <a href="?section=cronometro" class="block text-gray-800 mb-2">Cronómetro</a>
-        <a href="?section=listaAsistencia" class="block text-gray-800 mb-2">Lista de Asistencia</a>
-        <a href="?section=registro" class="block text-gray-800 mb-2">Registro</a>
-        <a href="?section=olimpiadas" class="block text-gray-800 mb-2">Olimpiadas</a>
-        <a href="?section=sedes" class="block text-gray-800 mb-2">Sedes</a>
-        <a href="?section=cuentas" class="block text-gray-800 mb-2">Cuentas</a>
-    </div>
-</nav>
-
-<?php
-include_once 'selector.php';
-
-$section = isset($_GET['section']) ? $_GET['section'] : '';
-
-if (function_exists('contentSelector')) {
-    contentSelector($section);
-} else {
-    echo 'La función contentSelector no está definida.';
-}
-?>
-<script src="../resources/js/jquery-3.3.1.min.js"></script>
-<script src="../resources/js/NavToggle.js"></script>
-
-<div class="border p-4">
-    <div class="flex justify-between items-center mb-4">
-        <h2 class="text-2xl font-bold">Detalles de Sede</h2>
-        <button class="bg-blue-500 text-white px-4 py-2 rounded">Crear Sede</button>
-    </div>
-
-    <table class="min-w-full divide-y divide-gray-200">
-        <thead class="bg-gray-50">
-            <tr>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    ID
-                </th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Nombre de la Sede
-                </th>
-            </tr>
-        </thead>
-        <tbody class="bg-white divide-y divide-gray-200">
-            <?php foreach ($datos as $dato) : ?>
-                <tr>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm text-gray-900"><?php echo $dato['id']; ?></div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm text-gray-900"><?php echo $dato['locationName']; ?></div>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-</div>
-<?php else : ?>
-<p class="text-red-500">No se encontraron datos para la sede con ID <?php echo $idSede; ?></p>
-<?php endif; ?>
-<!-- CrearSedeComponent.php -->
-<div id="modal" class="fixed inset-0 bg-gray-800 bg-opacity-75 z-50 hidden">
-    <div class="flex items-center justify-center h-screen">
-        <div class="bg-white p-8 rounded shadow-md w-1/2">
-            <!-- Contenido del formulario para crear sede -->
-            <h2 class="text-2xl font-bold mb-4">Crear Sede</h2>
-            <!-- Agrega aquí el formulario para la creación de la sede -->
-            <!-- Ejemplo de formulario básico -->
-            <form action="crear_sede.php" method="POST">
-                <label for="nombre_sede" class="block text-sm font-medium text-gray-700">Nombre de la Sede:</label>
-                <input type="text" id="nombre_sede" name="nombre_sede" class="mt-1 p-2 border rounded-md w-full">
-
-                <!-- Agrega más campos según sea necesario -->
-
-                <div class="mt-4">
-                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Guardar</button>
-                    <button type="button" onclick="closeModal()" class="ml-2 text-gray-600">Cancelar</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<script>
-    function openModal() {
-        document.getElementById('modal').classList.remove('hidden');
-    }
-
-    function closeModal() {
-        document.getElementById('modal').classList.add('hidden');
-    }
-</script>
-<div class="mb-4">
-    <input type="text" id="searchInput" placeholder="Buscar sede..." class="p-2 border rounded-md">
-</div>
+</head>
+<body>
+  <!-- Div para cada clase -->
+  <div class="bg-blue-500 p-4"></div>
+  <div class="container mx-auto flex justify-between items-center"></div>
+  <div class="lg:hidden"></div>
+  <div class="hidden lg:flex space-x-4"></div>
+  <div id="mobile-menu" class="lg:hidden hidden bg-white p-4"></div>
+  <div class="border p-4"></div>
+  <div class="flex justify-between items-center mb-4"></div>
+  <h2 class="text-2xl font-bold"></h2>
+  <button class="bg-blue-500 text-white px-4 py-2 rounded"></button>
+  <table class="min-w-full divide-y divide-gray-200"></table>
+  <thead class="bg-gray-50"></thead>
+  <tbody class="bg-white divide-y divide-gray-200"></tbody>
+  <tr></tr>
+  <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"></th>
+  <td class="px-6 py-4 whitespace-nowrap"></td>
+  <div class="text-sm text-gray-900"></div>
+  <div class="fixed inset-0 bg-gray-800 bg-opacity-75 z-50 hidden"></div>
+  <div class="flex items-center justify-center h-screen"></div>
+  <div class="bg-white p-8 rounded shadow-md w-1/2"></div>
+  <form action="crear_sede.php" method="POST"></form>
+  <label for="nombre_sede" class="block text-sm font-medium text-gray-700"></label>
+  <input type="text" id="nombre_sede" name="nombre_sede" class="mt-1 p-2 border rounded-md w-full">
+  <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded"></button>
+  <button type="button" onclick="closeModal()" class="ml-2 text-gray-600"></button>
+  <div class="mb-4"></div>
+  <input type="text" id="searchInput" placeholder="Buscar sede..." class="p-2 border rounded-md">
+</body>
+</html>
