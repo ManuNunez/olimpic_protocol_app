@@ -23,7 +23,7 @@ $datos = getTestData();
     <div class="border p-4">
         <div class="flex justify-between items-center mb-4">
             <h2 class="text-2xl font-bold">Detalles de Sede</h2>
-            <button onclick="openModal('crear')" class="bg-blue-500 text-white px-4 py-2 rounded">Crear Sede</button>
+            <button onclick="openModal()" class="bg-blue-500 text-white px-4 py-2 rounded">Crear Sede</button>
         </div>
 
         <div class="mb-4">
@@ -89,7 +89,7 @@ $datos = getTestData();
     </div>
 </div>
 
-<script src="../resources/js/modal.js"></script>
+<script src="resources/js/modal.js"></script>
 <script>
     function borrarSede(sedeId) {
         // Lógica para borrar una sede
