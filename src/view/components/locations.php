@@ -72,7 +72,6 @@ $datos = getTestData();
         <div class="bg-white p-8 rounded shadow-md w-1/2">
             <h2 id="modalTitle" class="text-2xl font-bold mb-4">Crear Sede</h2>
             <form id="sedeForm"  method="POST">
-                <input type="hidden" id="location_name" name="sede_id">
                 <label for="location_name" class="block text-sm font-medium text-gray-700">Nombre de la Sede:</label>
                 <input type="text" id="location_name" name="nombre_sede" class="mt-1 p-2 border rounded-md w-full">
 

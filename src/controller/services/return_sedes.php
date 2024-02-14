@@ -6,7 +6,6 @@ $conn = connection();
 $query = "SELECT * FROM Sedes WHERE status = 1";
 $res = $conn->query($query);
 if ($res) {
-
     $conn->close();
 
     echo 1;
