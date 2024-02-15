@@ -16,6 +16,7 @@ $query = "INSERT INTO Sedes(
     )";
 $res = $conn->query($query);
 if($res){ // create a column in the table Sedes
+    $completeFlag = true;
     $query = "SELECT id FROM Sedes
     WHERE sede_name = '$sede_name' AND status = 1";
     $sedeIdAnswer = $conn->query($query);// Get the id from the sede just created
