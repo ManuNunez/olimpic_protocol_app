@@ -10,7 +10,7 @@ if ($res) {
     //$query_answer_arr = ['status'=>1];
     if($res->num_rows > 0 ){
         while($row = $res->fetch_assoc()) {
-           $query_answer_arr = ['id' => $row['id'], 'locationName' => $row['sede_name']];
+           $query_answer_arr[] = ['id' => $row['id'], 'locationName' => $row['sede_name']];
         }
     }
     $conn->close();
@@ -22,10 +22,10 @@ function getData(){
     return $query_answer_arr;
 }
 $i = 0;
-foreach ($query_answer_arr as $value){
-    echo $value[$i];
+/*foreach ($query_answer_arr as $value){
+    echo $value;
     $i++;
-}
+}*/
 echo '<br>'.json_encode($query_answer_arr);
 
 
