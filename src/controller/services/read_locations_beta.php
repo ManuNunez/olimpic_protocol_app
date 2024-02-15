@@ -8,7 +8,7 @@ function getTestData()
         ['id' => 2, 'locationName' => 'Location B'],
         ['id' => 3, 'locationName' => 'Location C'],
     ];
-
+    //echo $testData;
     return $testData;
 }
 

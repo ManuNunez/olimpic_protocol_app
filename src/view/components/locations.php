@@ -7,6 +7,7 @@
  //include_once 'read_location.php';
 // Si deseas datos de prueba
 include_once '../controller/services/read_locations_beta.php';
+//include_once '../controller/services/return_sedes.php';
 
 
 $datos;
@@ -18,6 +19,12 @@ $idSede = 1;
 // $datos = getLocationData($idSede);
 // Si quieres datos de prueba descomenta esta línea y comenta la anterior
 $datos = getTestData();
+
+//$datos = getData(); hice algunas pruebas no jala we es que el foreach no jala
+// creo que es diferente tipo de dato pero casualmente creo el dato igual que tu
+// en el read.locations.beta.php pero no jala
+//cuando llegan los datos que te envio llegan asi
+//
 ?>
 
 <?php if ($datos) : ?>
