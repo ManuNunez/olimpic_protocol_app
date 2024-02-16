@@ -1,5 +1,5 @@
 <head>
-    <link rel="stylesheet" href="../resources/main.css">
+    <link rel="stylesheet" href="resources/main.css">
 </head>
 <div class="bg-gray-800 p-8 rounded shadow-md w-96">
     <div class="text-center mb-6">

@@ -1,33 +1,30 @@
 <head>
-    <link rel="stylesheet" href="../resources/main.css">
+    <link rel="stylesheet" href="resources/main.css">
 </head>
 <?php
 // Puedes cambiar la importación según tus necesidades
 // Si deseas datos reales
- //include_once 'read_location.php';
+include_once '../controller/services/return_sedes.php';
 // Si deseas datos de prueba
-include_once '../controller/services/read_locations_beta.php';
-//include_once '../controller/services/return_sedes.php';
+//include_once '../controller/services/read_locations_beta.php';
 
-
-$datos;
 
 // Cambia este valor según tus necesidades
 $idSede = 1;
 
 // Si quieres datos reales descomenta esta línea y comenta la siguiente
-// $datos = getLocationData($idSede);
+$datos = json_decode($ans, true);
 // Si quieres datos de prueba descomenta esta línea y comenta la anterior
-$datos = getTestData();
+//$datos = getTestData();
 
-//$datos = getData(); hice algunas pruebas no jala we es que el foreach no jala
-// creo que es diferente tipo de dato pero casualmente creo el dato igual que tu
-// en el read.locations.beta.php pero no jala
-//cuando llegan los datos que te envio llegan asi
-//
 ?>
 
-<?php if ($datos) : ?>
+<script>
+// Imprimir el valor de la variable PHP en la consola del navegador
+console.log(<?php echo json_encode($datos); ?>);
+</script>
+
+<?php if (!isset($datos['error'])) : ?>
     <div class="border p-4">
         <div class="flex justify-between items-center mb-4">
             <h2 class="text-2xl font-bold">Detalles de Sede</h2>
