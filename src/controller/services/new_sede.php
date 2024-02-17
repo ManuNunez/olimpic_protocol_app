@@ -17,6 +17,11 @@ $query = "INSERT INTO Sedes(
 $res = $conn->query($query);
 if($res){ // create a column in the table Sedes
     $completeFlag = true;
+    $sede_name_holder = $sede_name;
+    for($i = 0; $i != strlen($sede_name_holder); $i++) { // comparing if the string sede has a space.
+        if($sede_name_holder[$i] != ' ') $sede_name[$i] = $sede_name_holder[$i];
+        else $sede_name[$i] = '-';
+    }
     $query = "SELECT id FROM Sedes
     WHERE sede_name = '$sede_name' AND status = 1";
     $sedeIdAnswer = $conn->query($query);// Get the id from the sede just created
