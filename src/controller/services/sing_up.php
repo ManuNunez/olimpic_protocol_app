@@ -3,7 +3,7 @@
     $conn = connection();
     $username = $_REQUEST['username']; // for the username is just a guess
     $pass = md5($_REQUEST['pass']);
-    //$timeStamp = $_REQUEST['timeStamp']; //ADD TIMESTAAMP IN SQL TB
+    //$timeStamp = $_REQUEST['timeStamp']; // ADD TIMESTAAMP IN SQL TB
     $userTypeId = $_REQUEST['user_type_id'];
     $sedeId = $_REQUEST[''];
 

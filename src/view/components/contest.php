@@ -1,5 +1,5 @@
 <head>
-    <link rel="stylesheet" href="resources/main.css">
+    <link rel="stylesheet" href="../view/resources/main.css">
 </head>
 <?php
 
