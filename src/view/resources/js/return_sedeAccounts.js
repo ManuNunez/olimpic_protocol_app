@@ -17,7 +17,6 @@ function getSedeAccounts(id) {
             mostrarCuentas(accounts);
         },
         error: function() {
-            alert('¡Error al obtener las cuentas de la sede!');
         }
     });
 }

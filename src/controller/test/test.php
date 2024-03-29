@@ -1,17 +1,22 @@
 <?php
 
-require '../config/con.php';
-$conn = connection();
+    echo 'entro al test <br>';
+    $sede_name = 'string vemos';
+    echo strlen($sede_name);
+    echo '<br>';
+    echo $sede_name;
+    echo '<br>';
 
-$query = "SELECT * FROM Sedes WHERE status = 1";
-$res = $conn->query($query);
-if ($res) {
+    $sede_name_holder = $sede_name;
 
-    $conn->close();
 
-    echo 1;
-} else {
-    echo 0 . 'Error during the query: ' . $conn->error;
-}
+
+
+    for($i = 0; $i != strlen($sede_name_holder); $i++) {
+        if($sede_name_holder[$i] != ' ') $sede_name[$i] = $sede_name_holder[$i];
+        else $sede_name[$i] = '-';
+    }
+
+    echo $sede_name;
 
 ?>

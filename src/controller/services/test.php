@@ -1,22 +1,14 @@
 <?php
-
-    echo 'entro al test <br>';
-    $sede_name = 'string vemos';
-    echo strlen($sede_name);
-    echo '<br>';
-    echo $sede_name;
-    echo '<br>';
-
-    $sede_name_holder = $sede_name;
+require_once '../config/con.php';
+require_once 'omrchdb.php';
 
 
 
+$query ="SELECT * FROM Sedes WHERE status = .";
+$params = [1];
 
-    for($i = 0; $i != strlen($sede_name_holder); $i++) {
-        if($sede_name_holder[$i] != ' ') $sede_name[$i] = $sede_name_holder[$i];
-        else $sede_name[$i] = '-';
-    }
+$consulta = new omrchdb();
+$consulta->select($query,$params[]);
 
-    echo $sede_name;
 
-?>
+``
