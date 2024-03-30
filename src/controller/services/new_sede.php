@@ -29,7 +29,7 @@ if($res){ // create a column in the table Sedes
     $sede_id = $row['id'];
     $user_type_id = 3;
     for($i = 1 ; $i != 3 ; $i++){ // insert 2 new users type Staff
-        $new_staff_account = 'STAFF' . $sede_name . '-' . $i;
+        $new_staff_account = 'STAFF-' . $sede_name . '-' . $i;
         $new_staff_pass =  md5('STAFF-' .$sede_name  .  '-' . $i . '$');
         $query = "INSERT INTO USERS(
         username,
