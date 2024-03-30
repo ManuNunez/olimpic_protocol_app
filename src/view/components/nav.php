@@ -1,5 +1,5 @@
 <head>
-    <link rel="stylesheet" href="../resources/main.css">
+  <link rel="stylesheet" href="../view/resources/main.css">
 </head>
 <!-- nav.php -->
 <nav class="bg-blue-500 p-4">
@@ -14,12 +14,12 @@
           </svg>
         </button>
       </div>
-    </div>
+    </div>  
   </div>
   
   <div id="menu" class="md:hidden hidden transition-all duration-300 ease-in-out">
     <a href="?section=chat" class="block text-gray-800 mb-2">Chat</a>
-    <a href="?section=timer" class="block text-gray-800 mb-2">cronometro</a>
+    <a href="?section=timer" class="block text-gray-800 mb-2">Cronómetro</a>
     <a href="?section=attendanceList" class="block text-gray-800 mb-2">Lista de Asistencia</a>
     <a href="?section=registration" class="block text-gray-800 mb-2">Registro</a>
     <a href="?section=contest" class="block text-gray-800 mb-2">Concursos</a>

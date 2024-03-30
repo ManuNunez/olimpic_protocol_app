@@ -1,5 +1,5 @@
 <head>
-    <link rel="stylesheet" href="resources/main.css">
+    <link rel="stylesheet" href="../view/resources/main.css">
 </head>
 <?php
 
@@ -60,7 +60,7 @@
 <div id="modal" class="fixed inset-0 bg-gray-800 bg-opacity-75 z-50 hidden">
     <div class="flex items-center justify-center h-screen">
         <div class="bg-white p-8 rounded shadow-md w-1/2">
-            <h2 id="modalTitle" class="text-2xl font-bold mb-4">Cuentas asignadas</h2>
+            <h2 id="modal-title" class="text-2xl font-bold mb-4">Cuentas asignadas</h2>
             <table id="modal-content" class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                     <tr>
