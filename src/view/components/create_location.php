@@ -1,5 +1,5 @@
 <head>
-    <link rel="stylesheet" href="../resources/main.css">
+    <link rel="stylesheet" href="resources/main.css">
 </head>
 <!-- CrearSedeComponent.php -->
 <div id="modal" class="fixed inset-0 bg-gray-800 bg-opacity-75 z-50 hidden">
