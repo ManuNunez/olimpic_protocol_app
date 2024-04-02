@@ -7,7 +7,9 @@ include_once '../controller/services/read_contest_beta.php';
 
 $data_json = getTestData();
 $datos = json_decode($data_json, true);
-
+include_once '../controller/services/return_sedes.php';
+$idSede = 1;
+$location_data = json_decode($ans, true);
 ?>
 
 <script>
@@ -88,10 +90,11 @@ $datos = json_decode($data_json, true);
 
                 <label for="sede" class="block text-sm font-medium text-gray-700">Selecciona la Sede:</label>
                 <select id="sede" name="sede" class="mt-1 p-2 border rounded-md w-full">
-                    <?php foreach ($datos as $dato) : ?>
-                        <option value="<?php echo $dato['id']; ?>"><?php echo $dato['locationName']; ?></option>
+                    <?php foreach ($location_data as $location) : ?>
+                        <option value="<?php echo $location['locationName']; ?>"><?php echo $location['locationName']; ?></option>
                     <?php endforeach; ?>
                 </select>
+
 
                 <label for="contest_date" class="block text-sm font-medium text-gray-700">Fecha del Concurso:</label>
                 <input type="date" id="contest_date" name="contest_date" class="mt-1 p-2 border rounded-md w-full">
