@@ -1,14 +1,10 @@
 <head>
     <link rel="stylesheet" href="resources/main.css">
 </head>
-<!-- CrearSedeComponent.php -->
 <div id="modal" class="fixed inset-0 bg-gray-800 bg-opacity-75 z-50 hidden">
     <div class="flex items-center justify-center h-screen">
         <div class="bg-white p-8 rounded shadow-md w-1/2">
-            <!-- Contenido del formulario para crear sede -->
             <h2 class="text-2xl font-bold mb-4">Crear Sede</h2>
-            <!-- Agrega aquí el formulario para la creación de la sede -->
-            <!-- Ejemplo de formulario básico -->
             <form action="crear_sede.php" method="POST">
                 <label for="nombre_sede" class="block text-sm font-medium text-gray-700">Nombre de la Sede:</label>
                 <input type="text" id="nombre_sede" name="nombre_sede" class="mt-1 p-2 border rounded-md w-full">

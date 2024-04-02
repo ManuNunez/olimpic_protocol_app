@@ -81,13 +81,41 @@ $datos = json_decode($data_json, true);
 <div id="modal" class="fixed inset-0 bg-gray-800 bg-opacity-75 z-50 hidden">
     <div class="flex items-center justify-center h-screen">
         <div class="bg-white p-8 rounded shadow-md w-1/2">
-            <h2 id="modalTitle" class="text-2xl font-bold mb-4">Nuevo Concurso</h2>
-            <form id="sedeForm"  method="POST">
-                <!-- Aquí los campos del formulario para crear un nuevo alumno -->
+            <h2 id="modalTitle" class="text-2xl font-bold mb-4">Crear Concurso</h2>
+            <form id="concursoForm" method="POST">
+                <label for="contest_name" class="block text-sm font-medium text-gray-700">Nombre del Concurso:</label>
+                <input type="text" id="contest_name" name="contest_name" class="mt-1 p-2 border rounded-md w-full">
+
+                <label for="sede" class="block text-sm font-medium text-gray-700">Selecciona la Sede:</label>
+                <select id="sede" name="sede" class="mt-1 p-2 border rounded-md w-full">
+                    <?php foreach ($datos as $dato) : ?>
+                        <option value="<?php echo $dato['id']; ?>"><?php echo $dato['locationName']; ?></option>
+                    <?php endforeach; ?>
+                </select>
+
+                <label for="contest_date" class="block text-sm font-medium text-gray-700">Fecha del Concurso:</label>
+                <input type="date" id="contest_date" name="contest_date" class="mt-1 p-2 border rounded-md w-full">
+
+                <div class="mt-1 grid grid-cols-3 gap-4">
+                    <div><input type="checkbox" name="contest_level[]" value="Menores de 5to de Primaria"> Menores de 5to de Primaria</div>
+                    <div><input type="checkbox" name="contest_level[]" value="5to de Primaria"> 5to de Primaria</div>
+                    <div><input type="checkbox" name="contest_level[]" value="6to de Primaria"> 6to de Primaria</div>
+                    <div><input type="checkbox" name="contest_level[]" value="1ro de Secundaria"> 1ro de Secundaria</div>
+                    <div><input type="checkbox" name="contest_level[]" value="2do de Secundaria"> 2do de Secundaria</div>
+                    <div><input type="checkbox" name="contest_level[]" value="3ro de Secundaria"> 3ro de Secundaria</div>
+                    <div><input type="checkbox" name="contest_level[]" value="1ro-2do de Prepa"> 1ro-2do de Prepa</div>
+                    <div><input type="checkbox" name="contest_level[]" value="3ro-4to de Prepa"> 3ro-4to de Prepa</div>
+                    <div><input type="checkbox" name="contest_level[]" value="5to-6to de Prepa"> 5to-6to de Prepa</div>
+                </div>
+
+                <div class="mt-4">
+                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded" onclick="validateData()">Guardar</button>
+                    <button type="button" onclick="closeModal()" class="ml-2 text-gray-600">Cancelar</button>
+                </div>
             </form>
         </div>
     </div>
 </div>
 
 <script src="resources/js/modal.js"></script>
-<script src="resources/js/nuevo_alumno.js"></script>
+<script src="resources/js/new_contest.js"></script>
