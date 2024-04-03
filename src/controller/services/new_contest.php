@@ -70,12 +70,12 @@ function gradeUpdateValues($id,$conn){
                 $rows++;
             }
             if ($level == '1ro-2do de Prepa') {
-                $query = "UPDATE Contest SET 1`ro-2do-Prepa` = 1 WHERE id = '$id' AND status = 1";
+                $query = "UPDATE Contest SET `1ro-2do-Prepa` = 1 WHERE id = '$id' AND status = 1";
                 $res = $conn->query($query);
                 $rows++;
             }
             if ($level == '3ro-4to de Prepa') {
-                $query = "UPDATE Contest SET `3ro-4do-Prepa` = 1 WHERE id = '$id' AND status = 1";
+                $query = "UPDATE Contest SET `3ro-4to-Prepa` = 1 WHERE id = '$id' AND status = 1";
                 $res = $conn->query($query);
                 $rows++;
             }
@@ -88,7 +88,7 @@ function gradeUpdateValues($id,$conn){
         return array("status" => 1, "error"=>"Values updated: " . $rows);
 
     }catch (mysqli_sql_exception){
-        return array("status" => 0, "error"=>"Error during the gradeTpdateValues ". $conn->error );
+        return array("status" => 0, "error"=>"Error during the gradeUpdateValues ". $conn->error );
     }
 
 
