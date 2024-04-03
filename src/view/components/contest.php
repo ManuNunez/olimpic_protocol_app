@@ -85,6 +85,7 @@ $location_data = json_decode($ans, true);
         <div class="bg-white p-8 rounded shadow-md w-1/2">
             <h2 id="modalTitle" class="text-2xl font-bold mb-4">Crear Concurso</h2>
             <form id="concursoForm" method="POST">
+                
                 <label for="contest_name" class="block text-sm font-medium text-gray-700">Nombre del Concurso:</label>
                 <input type="text" id="contest_name" name="contest_name" class="mt-1 p-2 border rounded-md w-full">
 
