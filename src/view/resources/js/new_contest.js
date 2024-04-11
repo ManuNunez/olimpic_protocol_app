@@ -32,7 +32,7 @@ function sendForm() {
         type: "POST",
         data: formData,
         success: function(res) {
-            alert(res);
+           alert(res);
         },
         error: function() {
             alert('Error al enviar el formulario. Intente de nuevo más tarde.');

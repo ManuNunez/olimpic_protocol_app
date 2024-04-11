@@ -120,6 +120,5 @@ $location_data = json_decode($ans, true);
         </div>
     </div>
 </div>
-
 <script src="resources/js/modal.js"></script>
 <script src="resources/js/new_contest.js"></script>

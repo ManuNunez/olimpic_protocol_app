@@ -2,12 +2,12 @@
 require '../config/con.php';
 $conn = connection();
 
-function getData(){
+function getData(){ //create a array with all the inputs
     $contest  = array(
         "contestName" => $_REQUEST['contest_name'],
         "sede" => $_REQUEST['sede'],
         "contestDate" => $_REQUEST['contest_date'],
-
+        "contestDuration" => 90, //falta recibir la duracion de contest por ahorita el defecto es 90 en todos
     );
     return $contest;
 }
@@ -23,7 +23,7 @@ function getSedeId($sedeinput,$conn){
 }
 function insertContest($contest, $conn){
     try{
-        $query =  "INSERT INTO Contest (name, sede_id, contest_date) VALUES ('$contest[contestName]', '$contest[sede_id]', '$contest[contestDate]')";
+        $query =  "INSERT INTO Contest (name, sede_id, contest_date,duration_minutes) VALUES ('$contest[contestName]', '$contest[sede_id]', '$contest[contestDate]','$contest[contestDuration]')";
         $res = $conn->query($query);
         //return json_encode(array("status"=>"1"));
         return array("status"=>"1");
@@ -40,47 +40,47 @@ function gradeUpdateValues($id,$conn){
     try{
         foreach ($levels as $level) {
             if ($level == 'Menores de 5to de Primaria') {
-                $query = "UPDATE Contest SET `menores-5to-Primaria` = 1 WHERE id = '$id' AND status = 1";
+                $query = "UPDATE Contest SET `m_V_primaria` = 1 WHERE id = '$id' AND status = 1";
                 $res = $conn->query($query);
                 $rows++;
             }
             if ($level == '5to de Primaria') {
-                $query = "UPDATE Contest SET `5to-Primaria` = 1 WHERE id = '$id' AND status = 1";
+                $query = "UPDATE Contest SET `V_primaria` = 1 WHERE id = '$id' AND status = 1";
                 $res = $conn->query($query);
                 $rows++;
             }
             if ($level == '6to de Primaria') {
-                $query = "UPDATE Contest SET `6to-Primaria` = 1 WHERE id = '$id' AND status = 1";
+                $query = "UPDATE Contest SET `VI_primaria` = 1 WHERE id = '$id' AND status = 1";
                 $res = $conn->query($query);
                 $rows++;
             }
             if ($level == '1ro de Secundaria') {
-                $query = "UPDATE Contest SET `1ro-Secundaria` = 1 WHERE id = '$id' AND status = 1";
+                $query = "UPDATE Contest SET `I_secundaria` = 1 WHERE id = '$id' AND status = 1";
                 $res = $conn->query($query);
                 $rows++;
             }
             if ($level == '2do de Secundaria') {
-                $query = "UPDATE Contest SET `2do-Secundaria` = 1 WHERE id = '$id' AND status = 1";
+                $query = "UPDATE Contest SET `II_secundaria` = 1 WHERE id = '$id' AND status = 1";
                 $res = $conn->query($query);
                 $rows++;
             }
             if ($level == '3ro de Secundaria') {
-                $query = "UPDATE Contest SET `3ro-Secundaria` = 1 WHERE id = '$id' AND status = 1";
+                $query = "UPDATE Contest SET `III_secundaria` = 1 WHERE id = '$id' AND status = 1";
                 $res = $conn->query($query);
                 $rows++;
             }
             if ($level == '1ro-2do de Prepa') {
-                $query = "UPDATE Contest SET `1ro-2do-Prepa` = 1 WHERE id = '$id' AND status = 1";
+                $query = "UPDATE Contest SET `I_to_II_prepa` = 1 WHERE id = '$id' AND status = 1";
                 $res = $conn->query($query);
                 $rows++;
             }
             if ($level == '3ro-4to de Prepa') {
-                $query = "UPDATE Contest SET `3ro-4to-Prepa` = 1 WHERE id = '$id' AND status = 1";
+                $query = "UPDATE Contest SET `III_to_IV_prepa` = 1 WHERE id = '$id' AND status = 1";
                 $res = $conn->query($query);
                 $rows++;
             }
             if ($level == '5to-6to de Prepa') {
-                $query = "UPDATE Contest SET `5to-6to-Prepa` = 1 WHERE id = '$id' AND status = 1";
+                $query = "UPDATE Contest SET `V_to_IV_repa` = 1 WHERE id = '$id' AND status = 1";
                 $res = $conn->query($query);
                 $rows++;
             }
@@ -107,9 +107,11 @@ function getContestId($contest, $conn){
 }
 
 
-
 $contest = getData(); // array with the contest info
 $sede_id = getSedeId($contest['sede'],$conn); // get the sede id from the table sede with the name Selected
+
+
+
 if($sede_id != null){
     $contest['sede_id'] = $sede_id;
     $inserAnswer = insertContest($contest,$conn);
@@ -126,4 +128,5 @@ if($sede_id != null){
     echo json_encode(array("status"=>"0","error"=>"Error during the getSedeId function"));
 }
 $conn->close();
+
 
