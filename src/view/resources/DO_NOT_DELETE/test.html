@@ -1,0 +1,567 @@
+<head>
+  <link rel="stylesheet" href="resources/main.css">
+</head>
+<?php
+
+  include_once '../controller/services/return_sedes.php';
+  
+
+  $datos = json_decode($ans, true);
+
+?>
+
+<?php if ($datos) : ?>
+  <div class="border p-4">
+      <div class="flex justify-between items-center mb-4">
+          <h2 class="text-2xl font-bold">Sedes registradas</h2>
+      </div>
+
+      <div class="mb-4">
+          <input type="text" id="searchInput" placeholder="Buscar sede..." class="p-2 border rounded-md">
+      </div>
+
+      <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+              <tr>
+                  <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      ID
+                  </th>
+                  <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Nombre de la Sede
+                  </th>
+                  <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Acciones
+                  </th>
+              </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+              <?php foreach ($datos as $dato) : ?>
+                  <tr>
+                      <td class="px-6 py-4 whitespace-nowrap">
+                          <div class="text-sm text-gray-900"><?php echo $dato['id']; ?></div>
+                      </td>
+                      <td class="px-6 py-4 whitespace-nowrap">
+                          <div class="text-sm text-gray-900"><?php echo $dato['locationName']; ?></div>
+                      </td>
+                      <td class="px-6 py-4 whitespace-nowrap">
+                          
+                          <button id="consultar-btn" onclick="openModal('consultar', <?php echo $dato['id']; ?>)" class="text-blue-500">Consultar</button>
+                          
+                      </td>
+                  </tr>
+              <?php endforeach; ?>
+          </tbody>
+      </table>
+  </div>
+<?php else : ?>
+  <p class="text-red-500">No se encontraron datos para la sede con ID <?php echo $idSede; ?></p>
+<?php endif; ?>
+
+<div id="modal" class="fixed inset-0 bg-gray-800 bg-opacity-75 z-50 hidden">
+  <div class="flex items-center justify-center h-screen">
+      <div class="bg-white p-8 rounded shadow-md w-1/2">
+          <h2 id="modal-title" class="text-2xl font-bold mb-4">Cuentas asignadas</h2>
+          <table id="modal-content" class="min-w-full divide-y divide-gray-200">
+              <thead class="bg-gray-50">
+                  <tr>
+                      <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          ID
+                      </th>
+                      <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          USUARIO
+                      </th>
+                  </tr>
+              </thead>
+              <tbody class="bg-white divide-y divide-gray-200">
+                  <!-- Cuentas asignadas -->
+              </tbody>
+          </table>
+          <button type="button" onclick="closeModal()" class="ml-2 text-gray-600">Salir</button>
+      </div>
+  </div>
+</div>
+
+<!-- <script src="resources/js/modal.js"></script> -->
+<script src="resources/js/return_sedeAccounts.js"></script>
+<head>
+  <link rel="stylesheet" href="resources/main.css">
+</head>
+<?php
+session_start();
+
+if (isset($_POST['start'])) {
+  $_SESSION['start_time'] = time();
+  // TODO: Realizar la inserción en la base de datos (ver más adelante)
+}
+
+$elapsed_time = isset($_SESSION['start_time']) ? time() - $_SESSION['start_time'] : 0;
+?>
+
+<div class="timer-container">
+  <h1 class="timer-title">Cronómetro</h1>
+  <p class="timer-text">Tiempo transcurrido: <?php echo gmdate("H:i:s", $elapsed_time); ?></p>
+  <form method="post">
+      <button type="submit" name="start" class="start-button">
+          Iniciar Cronómetro
+      </button>
+  </form>
+</div>
+<head>
+  <link href="resources/main.css" rel="stylesheet">
+  <meta charset="UTF-8">
+</head>
+
+<header class="bg-white">
+  <nav class="mx-auto flex max-w-7xl items-center justify-between p-2 lg:px-1" aria-label="Global">
+      <div class="flex lg:flex-1">
+          <a href="index.php" class="-m-1.5 p-1.5">
+              <span class="sr-only">OMRCH</span>
+              <img class="w-16" src="resources/imgs/LogoOlimpiada.png" alt="">
+          </a>
+      </div>
+      <div class="hidden lg:flex lg:gap-x-9">
+
+          <a href="?section=accounts" class="block text-gray-800 mb-2 leading-6">Cuentas</a>
+          <a href="?section=contest" class="block text-gray-800 mb-2 leading-6">Concursos</a>
+          <a href="?section=timer" class="block text-gray-800 mb-2 leading-6">Cronómetro</a>
+          <a href="?section=chat" class="block text-gray-800 mb-2 leading-6">Chat</a>
+          <a href="?section=attendanceList" class="block text-gray-800 mb-2 leading-6">Lista de Asistencia</a>
+          <a href="?section=registration" class="block text-gray-800 mb-2 leading-6">Registro</a>
+          <a href="?section=locations" class="block text-gray-800 mb-2 leading-6" >Sedes</a>
+
+      </div>
+      <div class="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-4">
+          <a href="#" class="text-m font-semibold leading-6 text-gray-900">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 3.75v4.5m0-4.5h-4.5m4.5 0-6 6m3 12c-8.284 0-15-6.716-15-15V4.5A2.25 2.25 0 0 1 4.5 2.25h1.372c.516 0 .966.351 1.091.852l1.106 4.423c.11.44-.054.902-.417 1.173l-1.293.97a1.062 1.062 0 0 0-.38 1.21 12.035 12.035 0 0 0 7.143 7.143c.441.162.928-.004 1.21-.38l.97-1.293a1.125 1.125 0 0 1 1.173-.417l4.423 1.106c.5.125.852.575.852 1.091V19.5a2.25 2.25 0 0 1-2.25 2.25h-2.25Z" />
+              </svg>
+          </a>
+          <a href="#" class="text-md font-semibold leading-6 text-gray-900">
+              Llamar
+          </a>
+      </div>
+
+
+  </nav>
+
+  <!-- Mobile menu, show/hide based on menu open state. -->
+  <div  class="lg:hidden" role="dialog" aria-modal="true">
+      <!-- Background backdrop, show/hide based on slide-over state. -->
+      <div class="fixed inset-0 z-10"></div>
+      <div id="menu" class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+          <div class="flex items-center justify-between">
+              <a href="#" class="-m-1.5 p-1.5">
+                  <span class="sr-only">OMRCH</span>
+                  <img class="h-16 w-auto" src="resources/imgs/LogoOlimpiada.png" alt="">
+              </a>
+              <button id="menuBtn"  type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700">
+                  <span class="sr-only">Close menu</span>
+                  <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                  </svg>
+              </button>
+          </div>
+          <div   class="mt-6 flow-root" >
+              <div class="-my-6 divide-y divide-gray-500/10">
+                  <div class="space-y-2 py-6">
+
+                      <a href="?section=chat" class="block text-gray-800 mb-2">Chat</a>
+                      <a href="?section=timer" class="block text-gray-800 mb-2">Cronómetro</a>
+                      <a href="?section=attendanceList" class="block text-gray-800 mb-2">Lista de Asistencia</a>
+                      <a href="?section=registration" class="block text-gray-800 mb-2">Registro</a>
+                      <a href="?section=contest" class="block text-gray-800 mb-2">Concursos</a>
+                      <a href="?section=locations" class="block text-gray-800 mb-2">Sedes</a>
+                      <a href="?section=accounts" class="block text-gray-800 mb-2">Cuentas</a>
+
+
+                  </div>
+              </div>
+
+          </div>
+      </div>
+  </div>
+
+</header>
+<?php
+
+include_once 'selector.php';
+
+$section = isset($_GET['section']) ? $_GET['section'] : '';
+
+if (function_exists('contentSelector')) {
+  contentSelector($section);
+} else {
+  echo 'The function contentSelector is not defined.';
+}
+
+?>
+<head>
+  <link rel="stylesheet" href="resources/main.css">
+</head>
+
+
+<div class="bg-gray-50 p-8 rounded shadow-md w-96">
+  <div class="text-center mb-6">
+      <h2 class="text-2xl font-semibold">Iniciar Sesión</h2>
+  </div>
+
+  <form id="record">
+      <div class="mb-4">
+          <label for="username" class="block text-sm font-medium text-black">Nombre de Usuario</label>
+          <input type="text" id="username" name="username" class="mt-1 p-2 w-full bg-gray-700 text-black border rounded-md" required>
+      </div>
+
+      <div class="mb-4">
+          <label for="password" class="block text-sm font-medium text-black">Contraseña</label>
+          <input  type="password" id="password" name="password" class="mt-1 p-2 w-full bg-gray-700 text-black border rounded-md" required>
+      </div>
+
+      <button type="button" onclick="validateData()" class="bg-blue-500 text-white px-4 py-2 rounded-md w-full">Iniciar Sesión</button>
+  </form>
+</div>
+
+<script src="resources/js/login.js"></script>
+
+
+<head>
+  <link rel="stylesheet" href="resources/main.css">
+</head>
+<?php
+// Puedes cambiar la importación según tus necesidades
+// Si deseas datos reales
+include_once '../controller/services/return_sedes.php';
+// Si deseas datos de prueba
+//include_once '../controller/services/read_locations_beta.php';
+
+
+// Cambia este valor según tus necesidades
+$idSede = 1;
+
+// Si quieres datos reales descomenta esta línea y comenta la siguiente
+$datos = json_decode($ans, true);
+// Si quieres datos de prueba descomenta esta línea y comenta la anterior
+//$datos = getTestData();
+
+?>
+
+<script>
+// Imprimir el valor de la variable PHP en la consola del navegador
+console.log(<?php echo json_encode($datos); ?>);
+</script>
+
+<?php if (!isset($datos['error'])) : ?>
+  <div class="border p-4">
+      <div class="flex justify-between items-center mb-4">
+          <h2 class="text-2xl font-bold">Detalles de Sede</h2>
+          <button onclick="openModal()" class="bg-blue-500 text-white px-4 py-2 rounded">Crear Sede</button>
+      </div>
+
+      <div class="mb-4">
+          <input type="text" id="searchInput" placeholder="Buscar sede..." class="p-2 border rounded-md">
+      </div>
+
+      <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+              <tr>
+                  <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      ID
+                  </th>
+                  <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Nombre de la Sede
+                  </th>
+                  <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Acciones
+                  </th>
+              </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+              <?php foreach ($datos as $dato) : ?>
+                  <tr>
+                      <td class="px-6 py-4 whitespace-nowrap">
+                          <div class="text-sm text-gray-900"><?php echo $dato['id']; ?></div>
+                      </td>
+                      <td class="px-6 py-4 whitespace-nowrap">
+                          <div class="text-sm text-gray-900"><?php echo $dato['locationName']; ?></div>
+                      </td>
+                      <td class="px-6 py-4 whitespace-nowrap">
+                          <button onclick="openModal('editar', <?php echo $dato['id']; ?>)" class="text-blue-500">Editar</button>
+                          <button onclick="borrarSede(<?php echo $dato['id']; ?>)" class="text-red-500 ml-2">Borrar</button>
+                      </td>
+                  </tr>
+              <?php endforeach; ?>
+          </tbody>
+      </table>
+  </div>
+<?php else : ?>
+  <p class="text-red-500">No se encontraron datos para la sede con ID <?php echo $idSede; ?></p>
+<?php endif; ?>
+
+<div id="modal" class="fixed inset-0 bg-gray-800 bg-opacity-75 z-50 hidden">
+  <div class="flex items-center justify-center h-screen">
+      <div class="bg-white p-8 rounded shadow-md w-1/2">
+          <h2 id="modalTitle" class="text-2xl font-bold mb-4">Crear Sede</h2>
+          <form id="sedeForm"  method="POST">
+              <label for="location_name" class="block text-sm font-medium text-gray-700">Nombre de la Sede:</label>
+              <input type="text" id="location_name" name="nombre_sede" class="mt-1 p-2 border rounded-md w-full">
+
+              <label for="classrooms_location" class="block text-sm font-medium text-gray-700">Salones disponibles en la Sede:</label>
+              <input type="number" id="classroom_quantity" name="nombre_sede" class="mt-1 p-2 border rounded-md w-full">
+
+              <label for="classroom_capacity" class="block text-sm font-medium text-gray-700">capacidad promedio de los salones:</label>
+              <input type="number" id="classroom_capacity" name="nombre_sede" class="mt-1 p-2 border rounded-md w-full">
+              <div class="mt-4">
+                  <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded" onclick="validateData()">Guardar</button>
+                  <button type="button" onclick="closeModal()" class="ml-2 text-gray-600">Cancelar</button>
+              </div>
+          </form>
+      </div>
+  </div>
+</div>
+
+<script src="resources/js/modal.js"></script>
+<script src="resources/js/new_sede.js"></script>
+<head>
+  <link rel="stylesheet" href="../view/resources/main.css">
+</head>
+<footer class="bg-gray-800 text-white text-center py-4 fixed bottom-0 w-full">
+  <p>&copy; 2024 FLE_SYSTEMS. Todos los derechos reservados.</p>
+</footer>
+<head>
+  <link rel="stylesheet" href="resources/main.css">
+</head>
+<div id="modal" class="fixed inset-0 bg-gray-800 bg-opacity-75 z-50 hidden">
+  <div class="flex items-center justify-center h-screen">
+      <div class="bg-white p-8 rounded shadow-md w-1/2">
+          <h2 class="text-2xl font-bold mb-4">Crear Sede</h2>
+          <form action="crear_sede.php" method="POST">
+              <label for="nombre_sede" class="block text-sm font-medium text-gray-700">Nombre de la Sede:</label>
+              <input type="text" id="nombre_sede" name="nombre_sede" class="mt-1 p-2 border rounded-md w-full">
+              <div class="mt-4">
+                  <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Guardar</button>
+                  <button type="button" onclick="closeModal()" class="ml-2 text-gray-600">Cancelar</button>
+              </div>
+          </form>
+      </div>
+  </div>
+</div>
+
+<script>
+  function openModal() {
+      document.getElementById('modal').classList.remove('hidden');
+  }
+
+  function closeModal() {
+      document.getElementById('modal').classList.add('hidden');
+  }
+</script>
+<head>
+  <link rel="stylesheet" href="resources/main.css">
+</head>
+<?php
+
+include_once '../controller/services/read_contest_beta.php';
+
+$data_json = getTestData();
+$datos = json_decode($data_json, true);
+include_once '../controller/services/return_sedes.php';
+$idSede = 1;
+$location_data = json_decode($ans, true);
+?>
+
+<script>
+  console.log(<?php echo json_encode($datos); ?>);
+</script>
+
+<?php if (!isset($datos['error'])) : ?>
+  <div class="border p-4">
+      <div class="flex justify-between items-center mb-4">
+          <h2 class="text-2xl font-bold">CONCURSOS</h2>
+          <button onclick="openModal()" class="bg-blue-500 text-white px-4 py-2 rounded">Nuevo Concurso</button>
+      </div>
+
+      <div class="mb-4">
+          <input type="text" id="searchInput" placeholder="Buscar alumno..." class="p-2 border rounded-md">
+      </div>
+
+      <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+              <tr>
+                  <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Nombre
+                  </th>
+                  <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Sede
+                  </th>
+                  <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Fecha
+                  </th>
+                  <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      No. de Alumnos
+                  </th>
+                  <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Status
+                  </th>
+                  <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Acciones
+                  </th>
+              </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+              <?php foreach ($datos as $dato) : ?>
+                  <tr>
+                      <td class="px-6 py-4 whitespace-nowrap">
+                          <div class="text-sm text-gray-900"><?php echo $dato['nombre']; ?></div>
+                      </td>
+                      <td class="px-6 py-4 whitespace-nowrap">
+                          <div class="text-sm text-gray-900"><?php echo $dato['sede']; ?></div>
+                      </td>
+                      <td class="px-6 py-4 whitespace-nowrap">
+                          <div class="text-sm text-gray-900"><?php echo $dato['fecha']; ?></div>
+                      </td>
+                      <td class="px-6 py-4 whitespace-nowrap">
+                          <div class="text-sm text-gray-900"><?php echo $dato['no_alumnos']; ?></div>
+                      </td>
+                      <td class="px-6 py-4 whitespace-nowrap">
+                          <div class="text-sm text-gray-900"><?php echo $dato['status']; ?></div>
+                      </td>
+                      <td class="px-6 py-4 whitespace-nowrap">
+                          <button onclick="editarAlumno(<?php echo $dato['id']; ?>)" class="bg-blue-500 text-white px-4 py-2 rounded">Editar</button>
+                      </td>
+                  </tr>
+              <?php endforeach; ?>
+          </tbody>
+      </table>
+  </div>
+<?php else : ?>
+  <p class="text-red-500">No se encontraron datos para la sede con ID <?php echo $idSede; ?></p>
+<?php endif; ?>
+
+<div id="modal" class="fixed inset-0 bg-gray-800 bg-opacity-75 z-50 hidden">
+  <div class="flex items-center justify-center h-screen">
+      <div class="bg-white p-8 rounded shadow-md w-1/2">
+          <h2 id="modalTitle" class="text-2xl font-bold mb-4">Crear Concurso</h2>
+          <form id="concursoForm" method="POST">
+              
+              <label for="contest_name" class="block text-sm font-medium text-gray-700">Nombre del Concurso:</label>
+              <input type="text" id="contest_name" name="contest_name" class="mt-1 p-2 border rounded-md w-full">
+
+              <label for="sede" class="block text-sm font-medium text-gray-700">Selecciona la Sede:</label>
+              <select id="sede" name="sede" class="mt-1 p-2 border rounded-md w-full">
+                  <?php foreach ($location_data as $location) : ?>
+                      <option value="<?php echo $location['locationName']; ?>"><?php echo $location['locationName']; ?></option>
+                  <?php endforeach; ?>
+              </select>
+
+
+              <label for="contest_date" class="block text-sm font-medium text-gray-700">Fecha del Concurso:</label>
+              <input type="date" id="contest_date" name="contest_date" class="mt-1 p-2 border rounded-md w-full">
+
+              <div class="mt-1 grid grid-cols-3 gap-4">
+                  <div><input type="checkbox" name="contest_level[]" value="Menores de 5to de Primaria"> Menores de 5to de Primaria</div>
+                  <div><input type="checkbox" name="contest_level[]" value="5to de Primaria"> 5to de Primaria</div>
+                  <div><input type="checkbox" name="contest_level[]" value="6to de Primaria"> 6to de Primaria</div>
+                  <div><input type="checkbox" name="contest_level[]" value="1ro de Secundaria"> 1ro de Secundaria</div>
+                  <div><input type="checkbox" name="contest_level[]" value="2do de Secundaria"> 2do de Secundaria</div>
+                  <div><input type="checkbox" name="contest_level[]" value="3ro de Secundaria"> 3ro de Secundaria</div>
+                  <div><input type="checkbox" name="contest_level[]" value="1ro-2do de Prepa"> 1ro-2do de Prepa</div>
+                  <div><input type="checkbox" name="contest_level[]" value="3ro-4to de Prepa"> 3ro-4to de Prepa</div>
+                  <div><input type="checkbox" name="contest_level[]" value="5to-6to de Prepa"> 5to-6to de Prepa</div>
+              </div>
+
+              <div class="mt-4">
+                  <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded" onclick="validateData()">Guardar</button>
+                  <button type="button" onclick="closeModal()" class="ml-2 text-gray-600">Cancelar</button>
+              </div>
+          </form>
+      </div>
+  </div>
+</div>
+<script src="resources/js/modal.js"></script>
+<script src="resources/js/new_contest.js"></script>
+<head>
+  <link rel="stylesheet" href="resources/main.css">
+</head>
+<?php
+
+  include_once '../controller/services/return_sedes.php';
+  
+
+  $datos = json_decode($ans, true);
+
+?>
+
+<?php if ($datos) : ?>
+  <div class="border p-4">
+      <div class="flex justify-between items-center mb-4">
+          <h2 class="text-2xl font-bold">Sedes registradas</h2>
+      </div>
+
+      <div class="mb-4">
+          <input type="text" id="searchInput" placeholder="Buscar sede..." class="p-2 border rounded-md">
+      </div>
+
+      <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+              <tr>
+                  <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      ID
+                  </th>
+                  <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Nombre de la Sede
+                  </th>
+                  <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Acciones
+                  </th>
+              </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+              <?php foreach ($datos as $dato) : ?>
+                  <tr>
+                      <td class="px-6 py-4 whitespace-nowrap">
+                          <div class="text-sm text-gray-900"><?php echo $dato['id']; ?></div>
+                      </td>
+                      <td class="px-6 py-4 whitespace-nowrap">
+                          <div class="text-sm text-gray-900"><?php echo $dato['locationName']; ?></div>
+                      </td>
+                      <td class="px-6 py-4 whitespace-nowrap">
+                          
+                          <button id="consultar-btn" onclick="openModal('consultar', <?php echo $dato['id']; ?>)" class="text-blue-500">Consultar</button>
+                          
+                      </td>
+                  </tr>
+              <?php endforeach; ?>
+          </tbody>
+      </table>
+  </div>
+<?php else : ?>
+  <p class="text-red-500">No se encontraron datos para la sede con ID <?php echo $idSede; ?></p>
+<?php endif; ?>
+
+<div id="modal" class="fixed inset-0 bg-gray-800 bg-opacity-75 z-50 hidden">
+  <div class="flex items-center justify-center h-screen">
+      <div class="bg-white p-8 rounded shadow-md w-1/2">
+          <h2 id="modal-title" class="text-2xl font-bold mb-4">Cuentas asignadas</h2>
+          <table id="modal-content" class="min-w-full divide-y divide-gray-200">
+              <thead class="bg-gray-50">
+                  <tr>
+                      <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          ID
+                      </th>
+                      <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          USUARIO
+                      </th>
+                  </tr>
+              </thead>
+              <tbody class="bg-white divide-y divide-gray-200">
+                  <!-- Cuentas asignadas -->
+              </tbody>
+          </table>
+          <button type="button" onclick="closeModal()" class="ml-2 text-gray-600">Salir</button>
+      </div>
+  </div>
+</div>
+
+<!-- <script src="resources/js/modal.js"></script> -->
+<script src="resources/js/return_sedeAccounts.js"></script>
+
+
