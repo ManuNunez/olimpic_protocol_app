@@ -1,7 +1,7 @@
 *.DS_Store
 
 *con.php
-src/view/test.php
+*src/view/test.php
 *test.php
 
 con.php
