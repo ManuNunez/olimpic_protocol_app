@@ -1,6 +1,14 @@
+
 document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('menuBtn').addEventListener('click', function() {
-      document.getElementById('menu').classList.toggle('hidden');
+    document.getElementById('openMenuBtn').addEventListener('click', function() {
+        $("#menu").css("display", "flex");
     });
-  });
-  
+});
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('closeMenuBtn').addEventListener('click', function() {
+        $("#menu").css("display", "none");
+    });
+});
