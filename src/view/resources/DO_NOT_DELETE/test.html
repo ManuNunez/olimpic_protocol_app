@@ -561,7 +561,36 @@ $location_data = json_decode($ans, true);
   </div>
 </div>
 
+<form id="record">
+        <div class="mb-4">
+            <label for="username" class="block text-sm font-medium text-black">Nombre de Usuario</label>
+            <input type="text" id="username" name="username" class="mt-1 p-2 w-full bg-gray-400 text-black border rounded-md" required>
+        </div>
+
+        <div class="mb-4">
+            <label for="password" class="block text-sm font-medium text-black">Contraseña</label>
+            <input  type="password" id="password" name="password" class="mt-1 p-2 w-full bg-gray-400 text-black border rounded-md" required>
+        </div>
+
+        <button type="button" onclick="validateData(event)" class="bg-blue-500 text-white px-4 py-2 rounded-md w-full">Iniciar Sesión</button>
+</form>
+
+<h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Chat en tiempo real</h1>
+
+<section id="chat" class="grid place-items-center mt-5 w-4/5">
+            <div class="flex flex-col w-4/5 leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700 mb-2">
+                <div class="flex items-center space-x-2 rtl:space-x-reverse">
+                    <span class="text-sm font-semibold text-gray-900 dark:text-white">Lorem Ipsum</span>
+                    <span class="text-sm font-normal text-gray-500 dark:text-gray-400">11:11</span>
+                </div>
+                <p class="text-sm font-normal py-2.5 text-gray-900 dark:text-white">Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor</p>
+                <span class="text-sm font-normal text-gray-500 dark:text-gray-400">Delivered</span>
+            </div>
+        </section>
+
 <!-- <script src="resources/js/modal.js"></script> -->
 <script src="resources/js/return_sedeAccounts.js"></script>
+
+
 
 
