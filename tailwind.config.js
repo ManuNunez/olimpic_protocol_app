@@ -1,6 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./src/view/resources/DO_NOT_DELETE/test.html"],
+  content: [
+    './src/view/resources/components/*.php',
+    './src/view/resources/*.php',
+],
   extend: {},
   plugins: [],
 }
