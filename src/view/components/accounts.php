@@ -57,7 +57,7 @@
     <p class="text-red-500">No se encontraron datos para la sede con ID <?php echo $idSede; ?></p>
 <?php endif; ?>
 
-<div id="modal" class="fixed inset-0 bg-gray-800 bg-opacity-75 z-50 hidden">
+<div id="new_contest" class="fixed inset-0 bg-gray-800 bg-opacity-75 z-50 hidden">
     <div class="flex items-center justify-center h-screen">
         <div class="bg-white p-8 rounded shadow-md w-1/2">
             <h2 id="modal-title" class="text-2xl font-bold mb-4">Cuentas asignadas</h2>

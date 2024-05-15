@@ -24,7 +24,7 @@ $location_data = json_decode($ans, true);
         </div>
 
         <div class="mb-4">
-            <input type="text" id="searchInput" placeholder="Buscar alumno..." class="p-2 border rounded-md">
+            <input type="text" id="searchInput" placeholder="Buscar Concurso..." class="p-2 border rounded-md">
         </div>
 
         <table class="min-w-full divide-y divide-gray-200">

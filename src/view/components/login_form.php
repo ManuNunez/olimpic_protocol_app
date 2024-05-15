@@ -22,5 +22,5 @@
         <button type="button" onclick="validateData()" class="bg-blue-500 text-white px-4 py-2 rounded-md w-full">Iniciar Sesión</button>
     </form>
 </div>
-
+ 
 <script src="resources/js/login.js"></script>
