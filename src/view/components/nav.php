@@ -8,16 +8,16 @@
 
 
 
-<header class="bg-white">
-    <nav class=" flex justify-between px-4 " aria-label="Global">
+<header class="bg-white ">
+    <nav class=" flex justify-between px-2 " aria-label="Global">
         <div class="flex">
             <a href="index.php" class="">
                 <span class="sr-only">OMRCH</span>
-                <img class="w-16" src="resources/imgs/LogoOlimpiada.png" alt="">
+                <img class="h-16 my-3" src="resources/imgs/LogoOMRCHVector.svg" alt="">
             </a>
         </div>
 
-        <div class="hidden  lg:flex lg:gap-x-5  my-6 w-full justify-center    lg:text-lg ">
+        <div class="hidden  lg:flex lg:gap-x-5  my-3 w-full justify-center    lg:text-lg ">
 
             <a href="?section=accounts" class="py-4 text-gray-800 mb-2 leading-6">Cuentas</a>
             <a href="?section=contest" class="py-4  text-gray-800 mb-2 leading-6">Concursos</a>
@@ -31,7 +31,7 @@
 
 
 
-        <div class="  lg:hidden  p-2.5 justify-end flex ">
+        <div class="  lg:hidden  sm:p-2.5 sm:justify-end sm:flex ">
             <button class="rounded-md p-2.5 text-gray-700 lg:hidden" type="button" id="openMenuBtn">
                 <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
