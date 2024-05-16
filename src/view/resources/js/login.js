@@ -1,4 +1,4 @@
-function validateData() {
+function validateData(event) {
     event.preventDefault();
 
     const form = document.getElementById('record');
