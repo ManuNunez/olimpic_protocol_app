@@ -7,7 +7,6 @@
 <body>
 
 
-
 <header class="bg-white ">
     <nav class=" flex justify-between px-2 " aria-label="Global">
         <div class="flex">
@@ -19,13 +18,29 @@
 
         <div class="hidden  lg:flex lg:gap-x-5  my-3 w-full justify-center    lg:text-lg ">
 
-            <a href="?section=accounts" class="py-4 text-gray-800 mb-2 leading-6">Cuentas</a>
-            <a href="?section=contest" class="py-4  text-gray-800 mb-2 leading-6">Concursos</a>
-            <a href="?section=timer" class="py-4  text-gray-800 mb-2 leading-6">Cronómetro</a>
-            <a href="?section=chat" class="py-4  text-gray-800 mb-2 leading-6">Chat</a>
-            <a href="?section=attendanceList" class="py-4  text-gray-800 mb-2 leading-6">Lista de Asistencia</a>
-            <a href="?section=registration" class="py-4  text-gray-800 mb-2 leading-6">Registro</a>
-            <a href="?section=locations" class="py-4  text-gray-800 mb-2 leading-6" >Sedes</a>
+            <?php if($_SESSION['logged'] == true && $_SESSION['user_type'] == 'manager') : ?> 
+                <a href="?section=accounts" class="py-4 text-gray-800 mb-2 leading-6">Cuentas</a>
+                <a href="?section=contest" class="py-4  text-gray-800 mb-2 leading-6">Concursos</a>
+                <a href="?section=timer" class="py-4  text-gray-800 mb-2 leading-6">Cronómetro</a>
+                <a href="?section=chat" class="py-4  text-gray-800 mb-2 leading-6">Chat</a>
+                <a href="?section=attendanceList" class="py-4  text-gray-800 mb-2 leading-6">Lista de Asistencia</a>
+                <a href="?section=registration" class="py-4  text-gray-800 mb-2 leading-6">Registro</a>
+                <a href="?section=locations" class="py-4  text-gray-800 mb-2 leading-6" >Sedes</a>
+            <?php elseif($_SESSION['logged'] == true && $_SESSION['userType'] == 'organizer') : ?>
+                <a href="?section=attendanceList" class="py-4  text-gray-800 mb-2 leading-6">Lista de Asistencia</a>
+                <a href="?section=chat" class="py-4  text-gray-800 mb-2 leading-6">Chat</a>
+
+            <?php elseif($_SESSION['logged'] == true && $_SESSION['user_type'] == 'staff') : ?>
+                <a href="?section=attendanceList" class="py-4  text-gray-800 mb-2 leading-6">Lista de Asistencia</a>
+
+
+            <?php elseif($_SESSION['logged'] == true && $_SESSION['user_type'] == 'classroom') : ?>
+                <a href="?section=attendanceList" class="py-4  text-gray-800 mb-2 leading-6">Lista de Asistencia</a>
+                <a href="?section=chat" class="py-4  text-gray-800 mb-2 leading-6">Chat</a>
+
+
+            <?php endif; ?>
+            
 
         </div>
 
@@ -61,13 +76,28 @@
                 <div class="-my-6 divide-y divide-gray-500/10">
 
                     <div class="space-y-2 py-6">
-                        <a href="?section=chat" class="block text-gray-800 mb-2">Chat</a>
-                        <a href="?section=timer" class="block text-gray-800 mb-2">Cronómetro</a>
-                        <a href="?section=attendanceList" class="block text-gray-800 mb-2">Lista de Asistencia</a>
-                        <a href="?section=registration" class="block text-gray-800 mb-2">Registro</a>
-                        <a href="?section=contest" class="block text-gray-800 mb-2">Concursos</a>
-                        <a href="?section=locations" class="block text-gray-800 mb-2">Sedes</a>
-                        <a href="?section=accounts" class="block text-gray-800 mb-2">Cuentas</a>
+                        <?php if($_SESSION['logged'] == true && $_SESSION['userType'] == 'manager') : ?>
+                            <a href="?section=accounts" class="py-4 text-gray-800 mb-2 leading-6">Cuentas</a>
+                            <a href="?section=contest" class="py-4  text-gray-800 mb-2 leading-6">Concursos</a>
+                            <a href="?section=timer" class="py-4  text-gray-800 mb-2 leading-6">Cronómetro</a>
+                            <a href="?section=chat" class="py-4  text-gray-800 mb-2 leading-6">Chat</a>
+                            <a href="?section=attendanceList" class="py-4  text-gray-800 mb-2 leading-6">Lista de Asistencia</a>
+                            <a href="?section=registration" class="py-4  text-gray-800 mb-2 leading-6">Registro</a>
+                            <a href="?section=locations" class="py-4  text-gray-800 mb-2 leading-6" >Sedes</a>
+                        <?php elseif($_SESSION['logged'] == true && $_SESSION['userType'] == 'organizer') : ?>
+                            <a href="?section=attendanceList" class="py-4  text-gray-800 mb-2 leading-6">Lista de Asistencia</a>
+                            <a href="?section=chat" class="py-4  text-gray-800 mb-2 leading-6">Chat</a>
+
+                        <?php elseif($_SESSION['logged'] == true && $_SESSION['userType'] == 'staff') : ?>
+                            <a href="?section=attendanceList" class="py-4  text-gray-800 mb-2 leading-6">Lista de Asistencia</a>
+
+
+                        <?php elseif($_SESSION['logged'] == true && $_SESSION['userType'] == 'classroom') : ?>
+                            <a href="?section=attendanceList" class="py-4  text-gray-800 mb-2 leading-6">Lista de Asistencia</a>
+                            <a href="?section=chat" class="py-4  text-gray-800 mb-2 leading-6">Chat</a>
+
+
+                        <?php endif; ?>
                     </div>
                 </div>
 
