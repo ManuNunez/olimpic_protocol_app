@@ -13,7 +13,7 @@ include_once '../controller/services/return_sedes.php';
 $idSede = 1;
 
 // Si quieres datos reales descomenta esta línea y comenta la siguiente
-$datos = json_decode($ans, true);
+$datos = json_decode(get_sedes(), true);
 // Si quieres datos de prueba descomenta esta línea y comenta la anterior
 //$datos = getTestData();
 
