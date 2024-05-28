@@ -6,7 +6,7 @@
     include_once '../controller/services/return_sedes.php';
     
 
-    $datos = json_decode($ans, true);
+    $datos = json_decode(get_sedes(), true);
 
 ?>
 
