@@ -2,13 +2,16 @@
     <link rel="stylesheet" href="resources/main.css">
 </head>
 <?php
+
 // Obtener los datos de concursos
-$contest_data_json = file_get_contents('http://localhost/controller/services/contest_return.php');
-$contest_data = json_decode($contest_data_json, true);
+include_once '../controller/services/contest_return.php';
+$contest_data = json_decode(get_contest_data(), true);
 
 // Obtener los datos de sedes
-$location_data_json = file_get_contents('http://localhost/controller/services/return_sedes.php');
-$location_data = json_decode($location_data_json, true);
+
+/*include_once '../controller/services/return_sedes.php';
+$location_data = json_decode(get_sedes(), true);
+*/
 
 // Verificar errores en los datos de concursos
 if (isset($contest_data['error'])) {
@@ -24,7 +27,7 @@ if (isset($location_data['error'])) {
 ?>
 
 <script>
-    console.log(<?php echo json_encode($contest_data); ?>);
+   // console.log(<?php echo json_encode($contest_data); ?>);
 </script>
 
 <div class="border p-4">
@@ -58,12 +61,7 @@ if (isset($location_data['error'])) {
                     <td class="px-6 py-4 whitespace-nowrap">
                         <div class="text-sm text-gray-900">
                             <?php
-                            foreach ($location_data as $location) {
-                                if ($location['id'] == $contest['sede_id']) {
-                                    echo $location['locationName'];
-                                    break;
-                                }
-                            }
+                            echo $contest['sede_name'];
                             ?>
                         </div>
                     </td>
@@ -81,7 +79,7 @@ if (isset($location_data['error'])) {
                                 $contest['VI_primaria'] ? '6to de Primaria' : '',
                                 $contest['I_secundaria'] ? '1ro de Secundaria' : '',
                                 $contest['II_secundaria'] ? '2do de Secundaria' : '',
-                                $contest['II_t_secundaria'] ? '3ro de Secundaria' : '',
+                                $contest['III_t_secundaria'] ? '3ro de Secundaria' : '',
                                 $contest['I_to_II_prepa'] ? '1ro-2do de Prepa' : '',
                                 $contest['III_to_IV_prepa'] ? '3ro-4to de Prepa' : '',
                                 $contest['V_to_VI_prepa'] ? '5to-6to de Prepa' : '',
