@@ -1,7 +1,7 @@
 
 // Función para abrir el modal
 function openModal(action, sedeId) {
-    //console.log("Botón Consultar de la sede con ID:", sedeId);
+    // console.log("Botón Consultar de la sede con ID:", sedeId);
     getSedeAccounts(sedeId);
 }
 
@@ -12,7 +12,7 @@ function getSedeAccounts(id) {
         data: { id: id },
         success: function(res) {
             // Mostrar los datos en el modal
-            //console.log(res);
+            // console.log(res);
             const accounts = JSON.parse(res);
             mostrarCuentas(accounts);
         },
