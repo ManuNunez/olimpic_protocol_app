@@ -63,7 +63,7 @@
             <div id="" class="flex items-center justify-between">
                 <a href="index.php" class="-m-1.5 p-1.5">
                     <span class="sr-only">OMRCH</span>
-                    <img class="h-16 w-auto" src="resources/imgs/LogoOlimpiada.png" >
+                    <img class="h-16 w-auto" src="resources/imgs/LogoOMRCHVector.svg" >
                 </a>
                 <button id="closeMenuBtn"  type="button" class="rounded-md p-2.5 text-gray-700">
                     <span class="sr-only">Close menu</span>
