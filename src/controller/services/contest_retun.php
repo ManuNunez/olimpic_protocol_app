@@ -1,8 +1,8 @@
 <?php
-require '../controller/config/con.php';
+require '../config/con.php';
 
 $conn = connection();
-$query = "SELECT * FROM Sedes WHERE status = 1";
+$query = "SELECT * FROM Contest WHERE status = 1";
 $res = $conn->query($query);
 
 if ($res && $res->num_rows > 0) {
@@ -11,7 +11,7 @@ if ($res && $res->num_rows > 0) {
     while ($row = $res->fetch_assoc()) {
         $sede = array(
             'id' => $row['id'],
-            'locationName' => $row['sede_name']
+            'locationName' => $row['name']
         );
         $query_answer_arr[] = $sede;
     }
