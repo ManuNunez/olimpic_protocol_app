@@ -2,170 +2,100 @@
     <link rel="stylesheet" href="resources/main.css">
 </head>
 <?php
+ob_start(); // Start output buffering
+include_once '../controller/services/contest_return.php';
+$contest_data_json = ob_get_clean(); // Get the content of the buffer and clean it
+$contest_data = json_decode($contest_data_json, true); // Decode the JSON response
 
 include_once '../controller/services/return_sedes.php';
-$location_data = json_decode($ans, true);
+$location_data_json = $ans; // Store the JSON response in a variable
+$location_data = json_decode($location_data_json, true); // Decode the JSON response
+// Check for errors in contest data
+if (isset($contest_data['error'])) {
+    echo "<p class='text-red-500'>No se encontraron datos de concursos activos.</p>";
+    return;
+}
 
-
-include_once '../controller/services/return_sedes.php';
-$idSede = 1;
-$location_data = json_decode($ans, true);
+// Check for errors in location data
+if (isset($location_data['error'])) {
+    echo "<p class='text-red-500'>No se encontraron datos de sedes activas.</p>";
+    return;
+}
 ?>
 
 <script>
-    console.log(<?php echo json_encode($datos); ?>);
+    console.log(<?php echo json_encode($contest_data); ?>);
 </script>
 
-<?php if (!isset($datos['error'])) : ?>
-    <div class="border p-4">
-        <div class="flex justify-between items-center mb-4">
-            <h2 class="text-2xl font-bold">CONCURSOS</h2>
-            <button onclick="openModal('newContest', -1)" class="bg-blue-500 text-white px-4 py-2 rounded">Nuevo Concurso</button>
-        </div>
+<div class="border p-4">
+    <div class="flex justify-between items-center mb-4">
+        <h2 class="text-2xl font-bold">CONCURSOS</h2>
+        <button onclick="openModal('newContest', -1)" class="bg-blue-500 text-white px-4 py-2 rounded">Nuevo Concurso</button>
+    </div>
 
-        <div class="mb-4">
-            <input type="text" id="searchInput" placeholder="Buscar Concurso..." class="p-2 border rounded-md">
-        </div>
+    <div class="mb-4">
+        <input type="text" id="searchInput" placeholder="Buscar Concurso..." class="p-2 border rounded-md">
+    </div>
 
-        <table class="min-w-full divide-y divide-gray-200">
-            <thead class="bg-gray-50">
+    <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-50">
+            <tr>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nombre</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Sede</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Duración (minutos)</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Niveles</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
+            </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+            <?php foreach ($contest_data as $contest) : ?>
                 <tr>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Nombre
-                    </th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Sede
-                    </th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Fecha
-                    </th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        No. de Alumnos
-                    </th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Status
-                    </th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Acciones
-                    </th>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-gray-900"><?php echo $contest['name']; ?></div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-gray-900">
+                            <?php
+                            foreach ($location_data as $location) {
+                                if ($location['id'] == $contest['sede_id']) {
+                                    echo $location['locationName'];
+                                    break;
+                                }
+                            }
+                            ?>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-gray-900"><?php echo $contest['contest_date']; ?></div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-gray-900"><?php echo $contest['duration_minutes']; ?></div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-gray-900">
+                            <?php echo implode(', ', array_filter([
+                                $contest['m_V_primaria'] ? 'Menores de 5to de Primaria' : '',
+                                $contest['V_primaria'] ? '5to de Primaria' : '',
+                                $contest['VI_primaria'] ? '6to de Primaria' : '',
+                                $contest['I_secundaria'] ? '1ro de Secundaria' : '',
+                                $contest['II_secundaria'] ? '2do de Secundaria' : '',
+                                $contest['II_t_secundaria'] ? '3ro de Secundaria' : '',
+                                $contest['I_to_II_prepa'] ? '1ro-2do de Prepa' : '',
+                                $contest['III_to_IV_prepa'] ? '3ro-4to de Prepa' : '',
+                                $contest['V_to_VI_prepa'] ? '5to-6to de Prepa' : '',
+                            ])); ?>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-gray-900"><?php echo $contest['status']; ?></div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <button onclick="openModal('editModal', <?php echo $contest['id']; ?>)" class="bg-blue-500 text-white px-4 py-2 rounded">Editar</button>
+                    </td>
                 </tr>
-            </thead>
-            <tbody class="bg-white divide-y divide-gray-200">
-                <?php foreach ($datos as $dato) : ?>
-                    <tr>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-gray-900"><?php echo $dato['nombre']; ?></div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-gray-900"><?php echo $dato['sede']; ?></div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-gray-900"><?php echo $dato['fecha']; ?></div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-gray-900"><?php echo $dato['no_alumnos']; ?></div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-gray-900"><?php echo $dato['status']; ?></div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <button onclick="openModal('editModal', <?php echo $dato['id'];?>)" class="bg-blue-500 text-white px-4 py-2 rounded">Editar</button>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    </div>
-<?php else : ?>
-    <p class="text-red-500">No se encontraron datos para la sede con ID <?php echo $idSede; ?></p>
-<?php endif; ?><div id="newContest" class="fixed inset-0 bg-gray-800 bg-opacity-75 z-50 hidden">
-    <div class="flex items-center justify-center h-screen">
-        <div class="bg-white p-8 rounded shadow-md w-1/2">
-            <h2 id="modalTitle" class="text-2xl font-bold mb-4">Crear Concurso</h2>
-            <form id="concursoForm" method="POST">
-                
-                <label for="contest_name" class="block text-sm font-medium text-gray-700">Nombre del Concurso:</label>
-                <input type="text" id="contest_name" name="contest_name" class="mt-1 p-2 border rounded-md w-full">
-
-                <label for="sede" class="block text-sm font-medium text-gray-700">Selecciona la Sede:</label>
-                <select id="sede" name="sede" class="mt-1 p-2 border rounded-md w-full">
-                    <?php foreach ($location_data as $location) : ?>
-                        <option value="<?php echo $location['locationName']; ?>"><?php echo $location['locationName']; ?></option>
-                    <?php endforeach; ?>
-                </select>
-
-                <label for="contest_date" class="block text-sm font-medium text-gray-700">Fecha del Concurso:</label>
-                <input type="date" id="contest_date" name="contest_date" class="mt-1 p-2 border rounded-md w-full">
-
-                <label for="contest_duration" class="block text-sm font-medium text-gray-700">Duración del Concurso (en minutos):</label>
-                <input type="number" id="contest_duration" name="contest_duration" class="mt-1 p-2 border rounded-md w-full">
-
-                <div class="mt-1 grid grid-cols-3 gap-4">
-                    <div><input type="checkbox" name="contest_level[]" value="Menores de 5to de Primaria"> Menores de 5to de Primaria</div>
-                    <div><input type="checkbox" name="contest_level[]" value="5to de Primaria"> 5to de Primaria</div>
-                    <div><input type="checkbox" name="contest_level[]" value="6to de Primaria"> 6to de Primaria</div>
-                    <div><input type="checkbox" name="contest_level[]" value="1ro de Secundaria"> 1ro de Secundaria</div>
-                    <div><input type="checkbox" name="contest_level[]" value="2do de Secundaria"> 2do de Secundaria</div>
-                    <div><input type="checkbox" name="contest_level[]" value="3ro de Secundaria"> 3ro de Secundaria</div>
-                    <div><input type="checkbox" name="contest_level[]" value="1ro-2do de Prepa"> 1ro-2do de Prepa</div>
-                    <div><input type="checkbox" name="contest_level[]" value="3ro-4to de Prepa"> 3ro-4to de Prepa</div>
-                    <div><input type="checkbox" name="contest_level[]" value="5to-6to de Prepa"> 5to-6to de Prepa</div>
-                </div>
-
-                <div class="mt-4">
-                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded" onclick="validateData()">Guardar</button>
-                    <button type="button" onclick="closeModal('newContest')" class="ml-2 text-gray-600">Cancelar</button>
-                </div>
-            </form>
-        </div>
-    </div>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
 </div>
-
-<div id="editModal" class="fixed inset-0 bg-gray-800 bg-opacity-75 z-50 hidden">
-    <div class="flex items-center justify-center h-screen">
-        <div class="bg-white p-8 rounded shadow-md w-1/2">
-            <h2 id="editModalTitle" class="text-2xl font-bold mb-4">Editar Concurso</h2>
-            <form id="editConcursoForm" method="POST">
-                <input type="hidden" id="edit_concurso_id" name="edit_concurso_id">
-
-                <label for="edit_contest_name" class="block text-sm font-medium text-gray-700">Nombre del Concurso:</label>
-                <input type="text" id="edit_contest_name" name="edit_contest_name" class="mt-1 p-2 border rounded-md w-full">
-
-                <label for="edit_sede" class="block text-sm font-medium text-gray-700">Selecciona la Sede:</label>
-                <select id="edit_sede" name="edit_sede" class="mt-1 p-2 border rounded-md w-full">
-                    <?php foreach ($location_data as $location) : ?>
-                        <option value="<?php echo $location['locationName']; ?>"><?php echo $location['locationName']; ?></option>
-                    <?php endforeach; ?>
-                </select>
-
-                <label for="edit_contest_date" class="block text-sm font-medium text-gray-700">Fecha del Concurso:</label>
-                <input type="date" id="edit_contest_date" name="edit_contest_date" class="mt-1 p-2 border rounded-md w-full">
-
-                <label for="edit_contest_duration" class="block text-sm font-medium text-gray-700">Duración del Concurso (en minutos):</label>
-                <input type="number" id="edit_contest_duration" name="edit_contest_duration" class="mt-1 p-2 border rounded-md w-full">
-
-                <div class="mt-1 grid grid-cols-3 gap-4">
-                    <div><input type="checkbox" name="edit_contest_level[]" value="Menores de 5to de Primaria"> Menores de 5to de Primaria</div>
-                    <div><input type="checkbox" name="edit_contest_level[]" value="5to de Primaria"> 5to de Primaria</div>
-                    <div><input type="checkbox" name="edit_contest_level[]" value="6to de Primaria"> 6to de Primaria</div>
-                    <div><input type="checkbox" name="edit_contest_level[]" value="1ro de Secundaria"> 1ro de Secundaria</div>
-                    <div><input type="checkbox" name="edit_contest_level[]" value="2do de Secundaria"> 2do de Secundaria</div>
-                    <div><input type="checkbox" name="edit_contest_level[]" value="3ro de Secundaria"> 3ro de Secundaria</div>
-                    <div><input type="checkbox" name="edit_contest_level[]" value="1ro-2do de Prepa"> 1ro-2do de Prepa</div>
-                    <div><input type="checkbox" name="edit_contest_level[]" value="3ro-4to de Prepa"> 3ro-4to de Prepa</div>
-                    <div><input type="checkbox" name="edit_contest_level[]" value="5to-6to de Prepa"> 5to-6to de Prepa</div>
-                </div>
-
-                <div class="mt-4">
-                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded" onclick="validateEditData()">Guardar Cambios</button>
-                    <button type="button" onclick="closeModal('editModal')" class="ml-2 text-gray-600">Cancelar</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-
-<script src="resources/js/"></script>
-<script src="resources/js/multi_modal.js"></script>
-<script src="resources/js/new_contest.js"></script>
