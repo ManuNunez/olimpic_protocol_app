@@ -2,21 +2,21 @@
     <link rel="stylesheet" href="resources/main.css">
 </head>
 <?php
-ob_start(); // Start output buffering
-include_once '../controller/services/contest_return.php';
-$contest_data_json = ob_get_clean(); // Get the content of the buffer and clean it
-$contest_data = json_decode($contest_data_json, true); // Decode the JSON response
+// Obtener los datos de concursos
+$contest_data_json = file_get_contents('http://localhost/controller/services/contest_return.php');
+$contest_data = json_decode($contest_data_json, true);
 
-include_once '../controller/services/return_sedes.php';
-$location_data_json = $ans; // Store the JSON response in a variable
-$location_data = json_decode($location_data_json, true); // Decode the JSON response
-// Check for errors in contest data
+// Obtener los datos de sedes
+$location_data_json = file_get_contents('http://localhost/controller/services/return_sedes.php');
+$location_data = json_decode($location_data_json, true);
+
+// Verificar errores en los datos de concursos
 if (isset($contest_data['error'])) {
     echo "<p class='text-red-500'>No se encontraron datos de concursos activos.</p>";
     return;
 }
 
-// Check for errors in location data
+// Verificar errores en los datos de sedes
 if (isset($location_data['error'])) {
     echo "<p class='text-red-500'>No se encontraron datos de sedes activas.</p>";
     return;
