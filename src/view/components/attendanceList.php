@@ -3,7 +3,7 @@
 </head>
 
 <?php
-session_start();
+
 
 $userType = "teacher";
 if($userType === "teacher"){

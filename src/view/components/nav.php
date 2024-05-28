@@ -17,29 +17,40 @@
         </div>
 
         <div class="hidden  lg:flex lg:gap-x-5  my-3 w-full justify-center    lg:text-lg ">
+            <?php
+                if(isset($_SESSION['logged'], $_SESSION['user_type'])){
+                    if($_SESSION['logged'] == true && $_SESSION['user_type'] == 'manager'){
+                        echo '<a href="?section=accounts" class="py-4 text-gray-800 mb-2 leading-6">Cuentas</a>';
+                        echo '<a href="?section=contest" class="py-4  text-gray-800 mb-2 leading-6">Concursos</a>';
+                        echo '<a href="?section=timer" class="py-4  text-gray-800 mb-2 leading-6">Cronómetro</a>';
+                        echo '<a href="?section=chat" class="py-4  text-gray-800 mb-2 leading-6">Chat</a>';
+                        echo '<a href="?section=attendanceList" class="py-4  text-gray-800 mb-2 leading-6">Lista de Asistencia</a>';
+                        echo '<a href="?section=registration" class="py-4  text-gray-800 mb-2 leading-6">Registro</a>';
+                        echo '<a href="?section=locations" class="py-4  text-gray-800 mb-2 leading-6" >Sedes</a>';
+                        echo '<a href="../controller/services/log_out.php" class="py-4  text-gray-800 mb-2 leading-6">Log out</a>';
 
-            <?php if($_SESSION['logged'] == true && $_SESSION['user_type'] == 'manager') : ?> 
-                <a href="?section=accounts" class="py-4 text-gray-800 mb-2 leading-6">Cuentas</a>
-                <a href="?section=contest" class="py-4  text-gray-800 mb-2 leading-6">Concursos</a>
-                <a href="?section=timer" class="py-4  text-gray-800 mb-2 leading-6">Cronómetro</a>
-                <a href="?section=chat" class="py-4  text-gray-800 mb-2 leading-6">Chat</a>
-                <a href="?section=attendanceList" class="py-4  text-gray-800 mb-2 leading-6">Lista de Asistencia</a>
-                <a href="?section=registration" class="py-4  text-gray-800 mb-2 leading-6">Registro</a>
-                <a href="?section=locations" class="py-4  text-gray-800 mb-2 leading-6" >Sedes</a>
-            <?php elseif($_SESSION['logged'] == true && $_SESSION['userType'] == 'organizer') : ?>
-                <a href="?section=attendanceList" class="py-4  text-gray-800 mb-2 leading-6">Lista de Asistencia</a>
-                <a href="?section=chat" class="py-4  text-gray-800 mb-2 leading-6">Chat</a>
-
-            <?php elseif($_SESSION['logged'] == true && $_SESSION['user_type'] == 'staff') : ?>
-                <a href="?section=attendanceList" class="py-4  text-gray-800 mb-2 leading-6">Lista de Asistencia</a>
-
-
-            <?php elseif($_SESSION['logged'] == true && $_SESSION['user_type'] == 'classroom') : ?>
-                <a href="?section=attendanceList" class="py-4  text-gray-800 mb-2 leading-6">Lista de Asistencia</a>
-                <a href="?section=chat" class="py-4  text-gray-800 mb-2 leading-6">Chat</a>
-
-
-            <?php endif; ?>
+                    }
+                    elseif($_SESSION['logged'] == true && $_SESSION['user_type'] == 'organizer'){
+                        echo '<a href="?section=attendanceList" class="py-4  text-gray-800 mb-2 leading-6">Lista de Asistencia</a>';
+                        echo '<a href="?section=chat" class="py-4  text-gray-800 mb-2 leading-6">Chat</a>';
+                    }
+                    elseif($_SESSION['logged'] == true && $_SESSION['user_type'] == 'staff'){
+                        echo '<a href="?section=attendanceList" class="py-4  text-gray-800 mb-2 leading-6">Lista de Asistencia</a>';
+                    
+                    }
+                    elseif($_SESSION['logged'] == true && $_SESSION['user_type'] == 'classroom'){
+                        echo '<a href="?section=attendanceList" class="py-1 text-gray-800 leading-6 block">Lista de Asistencia</a>';
+                        echo '<a href="?section=chat" class="py-1 text-gray-800 leading-6 block">Chat</a>';
+                    
+                    }
+                    else{
+                        echo '';
+                    }
+                }else{
+                    echo '';
+                }
+                
+            ?>
             
 
         </div>
@@ -76,29 +87,40 @@
                 <div class="-my-6 divide-y divide-gray-500/10">
 
                     <div class="space-y-2 py-6">
-                        <?php if($_SESSION['logged'] == true && $_SESSION['user_type'] == 'manager') : ?>
-                            <a href="?section=accounts" class="py-1 text-gray-800  leading-6 block">Cuentas</a>
-                            <a href="?section=contest" class="py-1  text-gray-800  leading-6 block">Concursos</a>
-                            <a href="?section=timer" class="py-1  text-gray-800  leading-6 block">Cronómetro</a>
-                            <a href="?section=chat" class="py-1  text-gray-800  leading-6 block">Chat</a>
-                            <a href="?section=attendanceList" class="py-1  text-gray-800  leading-6 block">Lista de Asistencia</a>
-                            <a href="?section=registration" class="py-1  text-gray-800  leading-6 block">Registro</a>
-                            <a href="?section=locations" class="py-1  text-gray-800  leading-6 block" >Sedes</a>
+                        <?php
+                            if(isset($_SESSION['logged'], $_SESSION['user_type'])){
+                                if($_SESSION['logged'] == true && $_SESSION['user_type'] == 'manager'){
+                                    echo '<a href="?section=accounts" class="py-1 text-gray-800 leading-6 block">Cuentas</a>';
+                                    echo '<a href="?section=contest" class="py-1 text-gray-800 leading-6 block">Concursos</a>';
+                                    echo '<a href="?section=timer" class="py-1 text-gray-800 leading-6 block">Cronómetro</a>';
+                                    echo '<a href="?section=chat" class="py-1 text-gray-800 leading-6 block">Chat</a>';
+                                    echo '<a href="?section=attendanceList" class="py-1 text-gray-800 leading-6 block">Lista de Asistencia</a>';
+                                    echo '<a href="?section=registration" class="py-1 text-gray-800 leading-6 block">Registro</a>';
+                                    echo '<a href="?section=locations" class="py-1 text-gray-800 leading-6 block">Sedes</a>';
 
-                        <?php elseif($_SESSION['logged'] == true && $_SESSION['user_type'] == 'organizer') : ?>
-                            <a href="?section=attendanceList" class="py-1  text-gray-800  leading-6 block">Lista de Asistencia</a>
-                            <a href="?section=chat" class="py-1  text-gray-800  leading-6 block">Chat</a>
+                                }
+                                elseif($_SESSION['logged'] == true && $_SESSION['user_type'] == 'organizer'){
+                                    echo '<a href="?section=attendanceList" class="py-1 text-gray-800 leading-6 block">Lista de Asistencia</a>';
+                                    echo '<a href="?section=chat" class="py-1 text-gray-800 leading-6 block">Chat</a>';
+                                }
+                                elseif($_SESSION['logged'] == true && $_SESSION['user_type'] == 'staff'){
+                                    echo '<a href="?section=attendanceList" class="py-1 text-gray-800 leading-6 block">Lista de Asistencia</a>';
+                                
+                                }
+                                elseif($_SESSION['logged'] == true && $_SESSION['user_type'] == 'classroom'){
+                                    echo '<a href="?section=attendanceList" class="py-1 text-gray-800 leading-6 block">Lista de Asistencia</a>';
+                                    echo '<a href="?section=chat" class="py-1 text-gray-800 leading-6 block">Chat</a>';
+                                
+                                }
+                                else{
+                                    echo '';
+                                }
+                            }else{
+                                echo '';
+                            }
+                            
+                        ?>
 
-                        <?php elseif($_SESSION['logged'] == true && $_SESSION['user_type'] == 'staff') : ?>
-                            <a href="?section=attendanceList" class="py-1  text-gray-800  leading-6 block">Lista de Asistencia</a>
-
-
-                        <?php elseif($_SESSION['logged'] == true && $_SESSION['user_type'] == 'classroom') : ?>
-                            <a href="?section=attendanceList" class="py-1  text-gray-800  leading-6 block">Lista de Asistencia</a>
-                            <a href="?section=chat" class="py-1  text-gray-800  leading-6 block">Chat</a>
-
-
-                        <?php endif; ?>
                     </div>
                 </div>
 

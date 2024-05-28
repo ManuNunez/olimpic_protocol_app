@@ -2,9 +2,6 @@
     <link rel="stylesheet" href="resources/main.css">
 </head>
 
-    <?php
-        session_start();
-    ?>
 
     <div class="w-full px-5 flex flex-col justify-center items-center">
         <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl">Chat oficial</h1>
