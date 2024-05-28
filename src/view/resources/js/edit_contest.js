@@ -1,6 +1,6 @@
 function validateData() {
     event.preventDefault();
-    sendForm();
+    sendEditForm();
 }
 
 function getData(id) {
@@ -16,35 +16,28 @@ function getLevels() {
     return levels;
 }
 
-function sendForm() {
+function sendEditForm() {
+    const contestId = $('#edit_concurso_id').val();
     const contestName = $('#contest_name').val();
     const sede = $('#sede').val();
     const contestDate = $('#contest_date').val();
-    const contestDuration = $('#contest_duration').val(); // Nuevo campo para la duración del concurso
     const levels = getLevels();
-    
     const formData = {
+        contest_id: contestId,
         contest_name: contestName,
         sede: sede,
         contest_date: contestDate,
-        contest_duration: contestDuration, // Incluyendo la duración del concurso
         levels: levels
     };
-    
     $.ajax({
-        url: "../controller/services/new_contest.php",
+        url: "../controller/services/edit_contest.php",
         type: "POST",
         data: formData,
         success: function(res) {
-            if (res.status === 1) {
-                alert('El concurso se ha creado correctamente.');
-            } else {
-                alert('Error al crear el concurso: ' + res.error);
-            }
+           alert(res); 
         },
         error: function() {
             alert('Error al enviar el formulario. Intente de nuevo más tarde.');
         }
     });
-    
 }

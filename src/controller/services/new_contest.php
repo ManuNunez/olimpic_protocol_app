@@ -7,7 +7,7 @@ function getData(){ //create a array with all the inputs
         "contestName" => $_REQUEST['contest_name'],
         "sede" => $_REQUEST['sede'],
         "contestDate" => $_REQUEST['contest_date'],
-        "contestDuration" => 90, //falta recibir la duracion de contest por ahorita el defecto es 90 en todos
+        "contestDuration" => $_REQUEST['contest_duration'], //falta recibir la duracion de contest por ahorita el defecto es 90 en todos
     );
     return $contest;
 }
