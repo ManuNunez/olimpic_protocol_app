@@ -38,7 +38,7 @@ function sendForm() {
                 }
             }else{
 
-                window.location.href = "?section=contest";
+                window.location.href = "?section=attendanceList";
             }
         },
         error: function() {
