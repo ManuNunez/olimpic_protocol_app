@@ -22,11 +22,35 @@
     
 
     <script type = "module">
-        const socket = new WebSocket('ws://45.79.19.252:32768');
+        const socket = new WebSocket('ws://localhost:32768');
 
         const messagesElement = document.getElementById('chat');
         const messageInput = document.getElementById('messageInput');
         const sendButton = document.getElementById('sendButton');
+
+        // Función para formatear la fecha y hora en el formato deseado
+        const formatDateTime = (dateTimeString) => {
+            // Convertir la cadena de tiempo en un objeto Date
+            const dateTime = new Date(dateTimeString);
+
+            // Restarle 6 horas al objeto Date
+            dateTime.setHours(dateTime.getHours());
+
+            // Opciones de formato para la fecha y hora
+            const options = {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: true
+            };
+
+            // Formatear la fecha y hora en el formato deseado
+            const formattedDateTime = dateTime.toLocaleString('en-US', options);
+            return formattedDateTime;
+        };
 
         // Función para manejar los mensajes del servidor WebSocket
         const handleMessage = (event) => {
@@ -47,7 +71,12 @@
 
             const timeSpan = document.createElement('span');
             timeSpan.classList.add('text-sm', 'font-normal', 'text-gray-500', 'dark:text-gray-400');
-            timeSpan.textContent = bodyMessage.guadalajaraTime;
+            if(bodyMessage.time != null){
+                const formattedTime = formatDateTime(bodyMessage.time);
+                timeSpan.textContent = formattedTime;
+            } else {
+                timeSpan.textContent = "";
+            }
 
             const messageP = document.createElement('p');
             messageP.classList.add('text-sm', 'font-normal', 'py-2.5', 'text-gray-900', 'dark:text-white');
@@ -77,10 +106,12 @@
             if (message.trim() !== '') {
                 const now = new Date();
                 const options = { timeZone: 'America/Mexico_City' };
-                const guadalajaraTime = now.toLocaleString('en-US', options);
-                console.log("Hora en Guadalajara:", guadalajaraTime);
+                const time = now.toLocaleString('en-US', options);
+                console.log("Hora en Guadalajara:", time);
                 const author = '<?php echo isset($_SESSION["username"]) ? $_SESSION["username"] : ""; ?>'
-                const bodyMessage = { message, guadalajaraTime, author };
+                const user_id = '<?php echo isset($_SESSION["user_id"]) ? $_SESSION["user_id"] : ""; ?>'
+                const sede_id = '<?php echo isset($_SESSION["user_sede_id"]) ? $_SESSION["user_sede_id"] : ""; ?>'
+                const bodyMessage = { user_id, sede_id, message, time, author };
                 socket.send(JSON.stringify(bodyMessage));
                 messageInput.value = '';
             }
@@ -92,6 +123,10 @@
                 sendButton.click();
             }
         });
+
+        
+
+
     </script>
 
 

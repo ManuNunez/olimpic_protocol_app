@@ -38,6 +38,8 @@ if($answer){
         $_SESSION['logged'] = true;
         $_SESSION['user_type'] = $userType;
         $_SESSION['username'] = $row['username'];
+        $_SESSION['user_id'] = $row['id'];
+        $_SESSION['user_sede_id'] = $row['sede_id'];
         $conn->close();
         $ans = json_encode(array(1));
         echo $ans;
