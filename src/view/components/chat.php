@@ -40,7 +40,7 @@
     
 
     <script type = "module">
-        const socket = new WebSocket('ws://localhost:32768');
+        const socket = new WebSocket('ws://45.79.19.252:32768');
 
         const messagesElement = document.getElementById('chat');
         const messageInput = document.getElementById('messageInput');
