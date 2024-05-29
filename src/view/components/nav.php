@@ -66,7 +66,7 @@ $section = isset($_GET['section']) ? $_GET['section'] : '';
                 
             ?>
         </div>
-        <div class="hidden  lg:flex   lg:justify-end inline-block  py-3  lg:text-lg ">
+        <div class="hidden  lg:flex   lg:justify-end   py-3  lg:text-lg ">
             <?php
             //<a href="../controller/services/log_out.php" class="py-4 mb-2 leading-6 hover:text-red-500 ">Log out</a>
             //
