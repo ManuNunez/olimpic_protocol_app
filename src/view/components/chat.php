@@ -2,15 +2,15 @@
     <link rel="stylesheet" href="resources/main.css">
 </head>
 
-<div class="w-full place-content-center row-end-1 my-10 inline-block" style="height: 600px">
-        <div>
-            <h1 class="text-center mb-1 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl">Chat oficial</h1>
-        </div>
-    <div class=" w-5/6 place-content-center inline-block rounded-lg shadow-lg content-center">
-        <div class="w-full inline-block  " >
-            <div class="w-5/6 px-5 flex flex-col   ">
-                <section id="chat" class="grid place-items-center  mt-5  w-4/5">
-                    <div class="flex flex-col w-4/5 leading-1.5 p-4 shadow-lg bg-blue-200 rounded-lg mb-2">
+<div class="w-full">
+
+</div>
+<div class="w-full flex justify-center">
+    <div class="w-11/12  row-end-1  grid   rounded-lg shadow-lg bg-gray-200 " style="height: 80vh">
+        <div class=" w-full  overflow-y-scroll m-1">
+            <div class="w-full justify-end flex" >
+                <section id="chat" class= " flex-col">
+                    <div class="flex flex-col  w-4/5 leading-1.5 p-4 shadow-lg bg-blue-200 rounded-lg my-2">
                         <div class="flex items-center space-x-2 rtl:space-x-reverse">
                             <span class="text-sm font-semibold text-gray-900 dark:text-white">Lorem Ipsum</span>
                             <span class="text-sm font-normal text-gray-500 dark:text-gray-400">11:11</span>
@@ -22,7 +22,7 @@
             </div>
         </div>
 
-        <div class="flex p-4   ">
+        <div class=" p-4 flex-col-2 flex ">
             <div class="w-5/6">
                 <input type="text" id="messageInput" class="border-gray-100 border-2 w-full rounded-lg p-3" placeholder="Escribe tu mensaje">
             </div>
@@ -37,6 +37,7 @@
         </div>
     </div>
 </div>
+
     
 
     <script type = "module">

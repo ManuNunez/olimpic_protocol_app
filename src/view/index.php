@@ -26,14 +26,10 @@ if (!isset($_SESSION['usuario'])) {
 <body>
     <?php include('components/nav.php'); ?>
     
-    <div class="center-container">
-        <div class="container">
-            <?php
-            include_once 'selector.php';
-            contentSelector(isset($_GET['section']) ? $_GET['section'] : 'login_form');
-            ?>
-        </div>
-    </div>
+    <?php
+    include_once 'selector.php';
+    contentSelector(isset($_GET['section']) ? $_GET['section'] : 'login_form');
+    ?>
 
     <?php include('components/footer.php'); ?>
 
