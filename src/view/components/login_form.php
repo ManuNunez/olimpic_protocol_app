@@ -31,9 +31,27 @@
 
             <div class="flex justify-between">
                 <a class="text-xs text-blue-500 pt-7 ">Recuperar Contraseña</a>
-                <button type="button" onclick="validateData(event)"  class="bg-blue-500 text-white py-2 px-4 rounded mt-4">Iniciar Sesión</button>
+                <button type="button" onclick="validateData()"  class="bg-blue-500 text-white py-2 px-4 rounded mt-4">Iniciar Sesión</button>
             </div>
         </form>
+    </div>
+</div>
+
+<!-- Modal de Error -->
+<div id="errorModal" tabindex="-1" aria-hidden="true" class="fixed inset-0 flex items-center justify-center z-50 hidden">
+    <div class="fixed inset-0 bg-black opacity-50" aria-hidden="true"></div>
+    <div class="relative bg-white p-6 rounded-lg shadow-lg max-w-sm mx-auto z-10">
+        <button type="button" class="absolute top-3 right-3 text-gray-400 hover:text-gray-600" data-modal-hide="hideErrorModalButton">
+            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            <span class="sr-only">Close modal</span>
+        </button>
+        <div class="text-center">
+            <h3 id="errorModalTitle" class="text-lg font-medium text-gray-900">Error</h3>
+            <p id="errorModalMessage" class="mt-2 text-sm text-gray-600"></p>
+            <button data-modal-hide="hideErrorModalButton" type="button" class="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-800">
+                Cerrar
+            </button>
+        </div>
     </div>
 </div>
 
@@ -48,4 +66,4 @@
 
 
 
-<script src="resources/js/login.js"></script>
+<script src="../controller/login.js"></script>
