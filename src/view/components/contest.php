@@ -6,6 +6,8 @@
 // Obtener los datos de concursos
 include_once '../models/contest/return_contests.php';
 $contests = json_decode(returnContests($conn), true);
+include_once '../models/contest/return_contest_campuses.php';
+$contest_campuses = json_decode(returnContestCampuses($conn, true));
 
 ?>
 
@@ -51,8 +53,7 @@ $contests = json_decode(returnContests($conn), true);
                         <div class="text-sm text-gray-900"><?php echo htmlspecialchars($contest['duration_minutes'], ENT_QUOTES, 'UTF-8'); ?> minutos</div>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
-
-                            <button class="text-blue-500">Por definir</button>
+                        <button class="text-blue-500" data-contest='<?php echo json_encode($contest); ?>' data-contest-campuses='<?php echo json_encode($contest_campuses); ?>' onclick="openEditModal(this)">Editar</button>
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -65,43 +66,73 @@ $contests = json_decode(returnContests($conn), true);
     </table>
 </div>
 
+
+<!-- MODAL PARA EDITAR CONTEST -->
 <div id="modal" class="fixed inset-0 bg-gray-800 bg-opacity-75 z-50 hidden">
     <div class="flex items-center justify-center h-screen">
         <div class="bg-white p-8 rounded shadow-md w-1/2">
-            <h2 id="modalTitle" class="text-2xl font-bold mb-4">Inscribirme</h2>
-            <form id="inscripcionForm" method="POST">
+            <h2 id="modalTitle" class="text-2xl font-bold mb-4">Editar concurso</h2>
+            <form id="editContestForm" method="POST">
                 
-                <label for="coachName" class="block text-sm font-medium text-gray-700 mt-4">Nombre de tu profesor:</label>
-                <input type="text" id="coachName" name="coachName" class="mt-1 p-2 border rounded-md w-full text-black" required>
+                <label for="name" class="block text-sm font-medium text-gray-700 mt-4">Nombre del concurso:</label>
+                <input type="text" id="name" name="name" class="mt-1 p-2 border rounded-md w-full text-black" required>
 
                 
-                <label for="coachEmail" class="block text-sm font-medium text-gray-700 mt-4">Correo de tu profesor:</label>
-                <input type="email" id="coachEmail" name="coachEmail" class="mt-1 p-2 border rounded-md w-full text-black" required>
+                <label for="duration_minutes" class="block text-sm font-medium text-gray-700 mt-4">Minutos de duración:</label>
+                <input type="email" id="duration_minutes" name="duration_minutes" class="mt-1 p-2 border rounded-md w-full text-black" required>
 
-                <label for="school" class="block text-sm font-medium text-gray-700 mt-4">CCT de tu Escuela:</label>
-                <input type="text" id="school" name="school" class="mt-1 p-2 border rounded-md w-full text-black" required>
+                <label for="contest_date" class="block text-sm font-medium text-gray-700 mt-4">Fecha del concurso:</label>
+                <input type="text" id="contest_date" name="contest_date" class="mt-1 p-2 border rounded-md w-full text-black" required>
+
+                <label for="phase" class="block text-sm font-medium text-gray-700 mt-4">Fase del concurso:</label>
+                <input type="text" id="phase" name="phase" class="mt-1 p-2 border rounded-md w-full text-black" required>
                 
-                <label for="campusSelect" class="block text-sm font-medium text-gray-700 mt-4">Selecciona un campus:</label>
-                <select id="campusSelect" name="campus" class="mt-1 p-2 border rounded-md w-full text-black">
-                    <!-- Opciones dinámicas -->
-                </select>
+                <label for="campusList" class="block text-sm font-medium text-gray-700 mt-4">Sedes:</label>
+                <ul id="campusList" class="mt-2">
+                    <!-- Lista dinámica de sedes se insertará aquí -->
+                </ul>
                 
                 <!-- Select para nivel -->
-                <label for="levelSelect" class="block text-sm font-medium text-gray-700 mt-4">Selecciona un nivel:</label>
-                <select id="levelSelect" name="levelSelect" class="mt-1 p-2 border rounded-md w-full text-black">
-                    <option value="1">Nivel 1 (1 - 5 de Primaria)</option>
-                    <option value="2">Nivel 2 (6 de Primaria)</option>
-                    <option value="3">Nivel 3 (1 de Secundaria)</option>
-                    <option value="4">Nivel 4 (2 de Secundaria)</option>
-                    <option value="5">Nivel 5 (3 de Secundaria)</option>
-                    <option value="6">Nivel 6 (1 - 2 de Preparatoria)</option>
-                    <option value="7">Nivel 7 (3 - 4 de Preparatoria)</option>
-                    <option value="8">Nivel 8 (5 - 6 de Preparatoria)</option>
-                </select>
+                <label for="levelSelect" class="block text-sm font-medium text-gray-700 mt-4">Selecciona los niveles:</label>
+                    <div class="mt-2 space-y-2">
+                        <div class="flex items-center">
+                            <input id="level1" name="levelSelect[]" type="checkbox" value="1" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                            <label for="level1" class="ml-2 block text-sm text-gray-800">Nivel 1 (1 - 5 de Primaria)</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input id="level2" name="levelSelect[]" type="checkbox" value="2" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                            <label for="level2" class="ml-2 block text-sm text-gray-800">Nivel 2 (6 de Primaria)</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input id="level3" name="levelSelect[]" type="checkbox" value="3" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                            <label for="level3" class="ml-2 block text-sm text-gray-800">Nivel 3 (1 de Secundaria)</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input id="level4" name="levelSelect[]" type="checkbox" value="4" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                            <label for="level4" class="ml-2 block text-sm text-gray-800">Nivel 4 (2 de Secundaria)</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input id="level5" name="levelSelect[]" type="checkbox" value="5" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                            <label for="level5" class="ml-2 block text-sm text-gray-800">Nivel 5 (3 de Secundaria)</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input id="level6" name="levelSelect[]" type="checkbox" value="6" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                            <label for="level6" class="ml-2 block text-sm text-gray-800">Nivel 6 (1 - 2 de Preparatoria)</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input id="level7" name="levelSelect[]" type="checkbox" value="7" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                            <label for="level7" class="ml-2 block text-sm text-gray-800">Nivel 7 (3 - 4 de Preparatoria)</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input id="level8" name="levelSelect[]" type="checkbox" value="8" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                            <label for="level8" class="ml-2 block text-sm text-gray-800">Nivel 8 (5 - 6 de Preparatoria)</label>
+                        </div>
+                    </div>
+
 
                 <div class="mt-4">
-                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Registrarme</button>
-                    <button type="button" onclick="closeModal()" class="ml-2 text-gray-600">Regresar</button>
+                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Editar</button>
+                    <button type="button" onclick="closeModal()" class="ml-2 text-gray-600">Cancelar</button>
                 </div>
             </form>
         </div>
@@ -126,4 +157,4 @@ $contests = json_decode(returnContests($conn), true);
     </div>
 </div>
 
-<script type="module" src=""></script>
+<script type="module" src="../controller/contest/update_contest.js"></script>

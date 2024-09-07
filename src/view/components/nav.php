@@ -36,7 +36,7 @@ $section = isset($_GET['section']) ? $_GET['section'] : '';
         <div class="hidden  lg:flex lg:gap-x-1  m-auto w-full justify-center    lg:text-lg ">
             <?php
                 if(isset($_SESSION['user'])){
-                    if($_SESSION['user']['role_id'] == 'manager'){
+                    if($_SESSION['user']['role_id'] == '2' || $_SESSION['user']['role_id'] == '1'){
                         echo '<a href="?section=accounts"       class="  py-4   p-2 mb-2 leading-6 hover:bg-gray-100 hover:text-black rounded-lg  '; if($section == "accounts") echo "text-blue-500 font-bold hover:text-blue-500 "; else echo " text-gray-600"; echo ' ">Cuentas</a>';
                         echo '<a href="?section=contest"        class="  py-4   p-2 mb-2 leading-6 hover:bg-gray-100 hover:text-black rounded-lg  '; if($section == "contest") echo "text-blue-500 font-bold hover:text-blue-500"; else echo " text-gray-600"; echo '">Concursos</a>';
                         echo '<a href="?section=timer"          class="  py-4   p-2 mb-2 leading-6 hover:bg-gray-100 hover:text-black rounded-lg '; if($section == "timer") echo "text-blue-500 font-bold hover:text-blue-500"; else echo " text-gray-600"; echo '">Cronómetro</a>';
@@ -45,15 +45,15 @@ $section = isset($_GET['section']) ? $_GET['section'] : '';
                         echo '<a href="?section=registration"   class="  py-4   p-2 mb-2 leading-6 hover:bg-gray-100 hover:text-black rounded-lg '; if($section == "registration") echo "text-blue-500 font-bold hover:text-blue-500"; else echo " text-gray-600"; echo '">Registro</a>';
                         echo '<a href="?section=locations"      class="  py-4   p-2 mb-2 leading-6 hover:bg-gray-100 hover:text-black rounded-lg '; if($section == "locations") echo "text-blue-500 font-bold hover:text-blue-500"; else echo " text-gray-600"; echo '" >Sedes</a>';
                     }
-                    elseif($_SESSION['user']['role_id'] == 'organizer'){
+                    elseif($_SESSION['user']['role_id'] == '3'){
                         echo '<a href="?section=chat"           class="  py-4   p-2 mb-2 leading-6 hover:bg-gray-100 hover:text-black rounded-lg '; if($section == "chat") echo "text-blue-500 font-bold hover:text-blue-500"; else echo " text-gray-600"; echo '">Chat</a>';
                         echo '<a href="?section=attendanceList" class="  py-4   p-2 mb-2 leading-6 hover:bg-gray-100 hover:text-black rounded-lg '; if($section == "attendanceList") echo "text-blue-500 font-bold hover:text-blue-500"; else echo " text-gray-600"; echo '">Lista de Asistencia</a>';
                     }
-                    elseif($_SESSION['user']['role_id'] == 'staff'){
+                    elseif($_SESSION['user']['role_id'] == '4'){
                         echo '<a href="?section=attendanceList" class="  py-4   p-2 mb-2 leading-6 hover:bg-gray-100 hover:text-black rounded-lg '; if($section == "attendanceList") echo "text-blue-500 font-bold hover:text-blue-500"; else echo " text-gray-600"; echo '">Lista de Asistencia</a>';
                     
                     }
-                    elseif($_SESSION['user']['role_id'] == 'classroom'){
+                    elseif($_SESSION['user']['role_id'] == '5'){
                         echo '<a href="?section=attendanceList" class="  py-4   p-2 mb-2 leading-6 hover:bg-gray-100 hover:text-black rounded-lg '; if($section == "attendanceList") echo "text-blue-500 font-bold hover:text-blue-500"; else echo " text-gray-600"; echo '">Lista de Asistencia</a>';
                         echo '<a href="?section=chat"           class="  py-4   p-2 mb-2 leading-6 hover:bg-gray-100 hover:text-black rounded-lg '; if($section == "chat") echo "text-blue-500 font-bold hover:text-blue-500"; else echo " text-gray-600"; echo '">Chat</a>';
                     }
@@ -114,7 +114,7 @@ $section = isset($_GET['section']) ? $_GET['section'] : '';
                     <div class="space-y-2 py-6">
                         <?php
                         if(isset($_SESSION['user'])){
-                        if($_SESSION['user']['role_id'] == 'manager'){
+                        if($_SESSION['user']['role_id'] == '2' || $_SESSION['user']['role_id'] == '1'){
                         echo '
                         <a href="?section=accounts"       class=" block  py-2   p-2 mb-2 leading-6 hover:bg-gray-100 hover:text-black rounded-lg  '; if($section == "accounts") echo "text-blue-500 font-bold hover:text-blue-500 "; else echo " text-gray-600"; echo ' ">Cuentas </a>
                         
@@ -126,15 +126,15 @@ $section = isset($_GET['section']) ? $_GET['section'] : '';
                         echo '<a href="?section=registration"   class="block  py-2   p-2 mb-2 leading-6 hover:bg-gray-100 hover:text-black rounded-lg '; if($section == "registration") echo "text-blue-500 font-bold hover:text-blue-500"; else echo " text-gray-600"; echo '">Registro</a>';
                         echo '<a href="?section=locations"      class="block  py-2   p-2 mb-2 leading-6 hover:bg-gray-100 hover:text-black rounded-lg '; if($section == "locations") echo "text-blue-500 font-bold hover:text-blue-500"; else echo " text-gray-600"; echo '" >Sedes</a>';
                         }
-                        elseif($_SESSION['user']['role_id'] == 'organizer'){
+                        elseif($_SESSION['user']['role_id'] == '3'){
                         echo '<a href="?section=attendanceList" class="block  py-2   p-2 mb-2 leading-6 hover:bg-gray-100 hover:text-black rounded-lg '; if($section == "attendanceList") echo "text-blue-500 font-bold hover:text-blue-500"; else echo " text-gray-600"; echo '">Lista de Asistencia</a>';
                         echo '<a href="?section=chat"           class="block  py-2   p-2 mb-2 leading-6 hover:bg-gray-100 hover:text-black rounded-lg '; if($section == "chat") echo "text-blue-500 font-bold hover:text-blue-500"; else echo " text-gray-600"; echo '">Chat</a>';
                         }
-                        elseif($_SESSION['user']['role_id'] == 'staff'){
+                        elseif($_SESSION['user']['role_id'] == '4'){
                         echo '<a href="?section=attendanceList" class="block  py-2   p-2 mb-2 leading-6 hover:bg-gray-100 hover:text-black rounded-lg '; if($section == "attendanceList") echo "text-blue-500 font-bold hover:text-blue-500"; else echo " text-gray-600"; echo '">Lista de Asistencia</a>';
 
                         }
-                        elseif($_SESSION['user']['role_id'] == 'classroom'){
+                        elseif($_SESSION['user']['role_id'] == '5'){
                         echo '<a href="?section=attendanceList" class="block  py-2   p-2 mb-2 leading-6 hover:bg-gray-100 hover:text-black rounded-lg '; if($section == "attendanceList") echo "text-blue-500 font-bold hover:text-blue-500"; else echo " text-gray-600"; echo '">Lista de Asistencia</a>';
                         echo '<a href="?section=chat"           class="block  py-2   p-2 mb-2 leading-6 hover:bg-gray-100 hover:text-black rounded-lg '; if($section == "chat") echo "text-blue-500 font-bold hover:text-blue-500"; else echo " text-gray-600"; echo '">Chat</a>';
                         }

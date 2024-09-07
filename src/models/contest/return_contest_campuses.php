@@ -4,10 +4,19 @@ require_once '../backend/config/con.php';
 
 $conn = connection();
 
-function returnContests($conn) {
+function returnContestCampuses($conn) {
     try {
-        // Definir la consulta incluyendo todas las columnas de niveles
-        $query = "SELECT id, name, duration_minutes, contest_date, phase_type, level_1, level_2, level_3, level_4, level_5, level_6, level_7, level_8 FROM contests";
+        // Consulta para seleccionar todos los campos de la tabla contest_campuses
+        $query = "
+            SELECT 
+                cc.contest_id, 
+                cc.campus_id, 
+                c.campus_name 
+            FROM 
+                contest_campuses cc
+            JOIN 
+                campuses c ON cc.campus_id = c.id";
+
         $stmt = $conn->prepare($query);
 
         // Verificar si la preparación del statement fue exitosa
@@ -41,5 +50,5 @@ function returnContests($conn) {
 
 // Encabezado para JSON
 // header('Content-Type: application/json');
-// echo returnContests($conn);
+// echo returnContestCampuses($conn);
 ?>

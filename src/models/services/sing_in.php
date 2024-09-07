@@ -1,6 +1,6 @@
 <?php
 session_start();
-require '../config/con.php';
+require '../../backend/config/con.php';
 
 $conn = connection();
 

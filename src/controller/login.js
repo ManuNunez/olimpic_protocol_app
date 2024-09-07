@@ -23,7 +23,7 @@ const sendForm = async () => {
     formData.append('password', password);
 
     try {
-        const response = await fetch('../controller/services/sing_in.php', {
+        const response = await fetch('../models/services/sing_in.php', {
             method: 'POST',
             body: formData,
             credentials: 'include' // Incluye las credenciales en la solicitud
