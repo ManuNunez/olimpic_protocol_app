@@ -82,10 +82,10 @@ $contest_campuses = json_decode(returnContestCampuses($conn, true));
                 <input type="email" id="duration_minutes" name="duration_minutes" class="mt-1 p-2 border rounded-md w-full text-black" required>
 
                 <label for="contest_date" class="block text-sm font-medium text-gray-700 mt-4">Fecha del concurso:</label>
-                <input type="text" id="contest_date" name="contest_date" class="mt-1 p-2 border rounded-md w-full text-black" required>
+                <input type="datetime-local" id="contest_date" name="contest_date" class="mt-1 p-2 border rounded-md w-full text-black" required>
 
                 <label for="phase" class="block text-sm font-medium text-gray-700 mt-4">Fase del concurso:</label>
-                <input type="text" id="phase" name="phase" class="mt-1 p-2 border rounded-md w-full text-black" required>
+                <input type="text" id="phase_type" name="phase" class="mt-1 p-2 border rounded-md w-full text-black" required>
                 
                 <label for="campusList" class="block text-sm font-medium text-gray-700 mt-4">Sedes:</label>
                 <ul id="campusList" class="mt-2">
@@ -96,42 +96,42 @@ $contest_campuses = json_decode(returnContestCampuses($conn, true));
                 <label for="levelSelect" class="block text-sm font-medium text-gray-700 mt-4">Selecciona los niveles:</label>
                     <div class="mt-2 space-y-2">
                         <div class="flex items-center">
-                            <input id="level1" name="levelSelect[]" type="checkbox" value="1" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
-                            <label for="level1" class="ml-2 block text-sm text-gray-800">Nivel 1 (1 - 5 de Primaria)</label>
+                            <input id="level_1" name="levelSelect[]" type="checkbox" value="1" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                            <label for="level_1" class="ml-2 block text-sm text-gray-800">Nivel 1 (1 - 5 de Primaria)</label>
                         </div>
                         <div class="flex items-center">
-                            <input id="level2" name="levelSelect[]" type="checkbox" value="2" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
-                            <label for="level2" class="ml-2 block text-sm text-gray-800">Nivel 2 (6 de Primaria)</label>
+                            <input id="level_2" name="levelSelect[]" type="checkbox" value="2" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                            <label for="level_2" class="ml-2 block text-sm text-gray-800">Nivel 2 (6 de Primaria)</label>
                         </div>
                         <div class="flex items-center">
-                            <input id="level3" name="levelSelect[]" type="checkbox" value="3" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
-                            <label for="level3" class="ml-2 block text-sm text-gray-800">Nivel 3 (1 de Secundaria)</label>
+                            <input id="level_3" name="levelSelect[]" type="checkbox" value="3" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                            <label for="level_3" class="ml-2 block text-sm text-gray-800">Nivel 3 (1 de Secundaria)</label>
                         </div>
                         <div class="flex items-center">
-                            <input id="level4" name="levelSelect[]" type="checkbox" value="4" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
-                            <label for="level4" class="ml-2 block text-sm text-gray-800">Nivel 4 (2 de Secundaria)</label>
+                            <input id="level_4" name="levelSelect[]" type="checkbox" value="4" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                            <label for="level_4" class="ml-2 block text-sm text-gray-800">Nivel 4 (2 de Secundaria)</label>
                         </div>
                         <div class="flex items-center">
-                            <input id="level5" name="levelSelect[]" type="checkbox" value="5" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
-                            <label for="level5" class="ml-2 block text-sm text-gray-800">Nivel 5 (3 de Secundaria)</label>
+                            <input id="level_5" name="levelSelect[]" type="checkbox" value="5" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                            <label for="level_5" class="ml-2 block text-sm text-gray-800">Nivel 5 (3 de Secundaria)</label>
                         </div>
                         <div class="flex items-center">
-                            <input id="level6" name="levelSelect[]" type="checkbox" value="6" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
-                            <label for="level6" class="ml-2 block text-sm text-gray-800">Nivel 6 (1 - 2 de Preparatoria)</label>
+                            <input id="level_6" name="levelSelect[]" type="checkbox" value="6" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                            <label for="level_6" class="ml-2 block text-sm text-gray-800">Nivel 6 (1 - 2 de Preparatoria)</label>
                         </div>
                         <div class="flex items-center">
-                            <input id="level7" name="levelSelect[]" type="checkbox" value="7" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
-                            <label for="level7" class="ml-2 block text-sm text-gray-800">Nivel 7 (3 - 4 de Preparatoria)</label>
+                            <input id="level_7" name="levelSelect[]" type="checkbox" value="7" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                            <label for="level_7" class="ml-2 block text-sm text-gray-800">Nivel 7 (3 - 4 de Preparatoria)</label>
                         </div>
                         <div class="flex items-center">
-                            <input id="level8" name="levelSelect[]" type="checkbox" value="8" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
-                            <label for="level8" class="ml-2 block text-sm text-gray-800">Nivel 8 (5 - 6 de Preparatoria)</label>
+                            <input id="level_8" name="levelSelect[]" type="checkbox" value="8" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                            <label for="level_8" class="ml-2 block text-sm text-gray-800">Nivel 8 (5 - 6 de Preparatoria)</label>
                         </div>
                     </div>
 
 
                 <div class="mt-4">
-                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Editar</button>
+                    <button type="button" onclick="saveChanges()" class="bg-blue-500 text-white px-4 py-2 rounded">Editar</button>
                     <button type="button" onclick="closeModal()" class="ml-2 text-gray-600">Cancelar</button>
                 </div>
             </form>
